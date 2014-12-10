@@ -6,6 +6,10 @@ bin/
 target/
 
 # ignore all files ending with ~
-*~ 
+*~
+
 # ignore .settings folder
 /.settings
+
+# ignore .files
+.*
