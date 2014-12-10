@@ -1,5 +1,9 @@
-<div class="panel panel-primary">
-  <div class="panel-heading todo-search">Patient Entry Form</div>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<div class="panel panel-default">
+	<div class="panel-heading">Patient Entry Form</div>
 	<div class="panel-body">
 		<fieldset>
 			<form class="form-horizontal"
@@ -10,6 +14,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-3 col-lg-3" for="patientName">Patient
 						Name</label>
+						<spring:message code="label.submit" var="labelSubmit"/>	
 					<div class="col-md-6">
 						<input class="form-control" for="patientName"
 							type="text" name="patientName" id="patientName" />
@@ -34,7 +39,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-3 col-lg-3">Type Of Test</label>
 					<div class="col-md-6">
-						<select class="form-control select select-primary"
+						<select class="form-control"
 							data-toggle="select" for="typeOfTest" name="typeOfTest"
 							id="typeOfTest">
 							<option value="0">XRAY</option>
@@ -65,7 +70,7 @@
 					</div>
 				</div>				
 				<div class="form-group">
-					<a class="btn btn-primary" href="#"
+					<a class="btn btn-primary btn-lg btn-block" href="#"
 			         onclick="submitForm('/account/savePatientDetails.action', 'patientDetails', 'containerdiv');">Save Patient Details</a>					
 				</div>
 			</form>

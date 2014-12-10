@@ -1,7 +1,7 @@
-<div class="panel panel-primary">
+<div class="panel panel-default">
 	<div class="panel-heading">Search</div>
-	 <div class="panel-body">
-		<fieldset>
+	<div class="panel-body">
+	<fieldset>
 			<form class="form-horizontal" id="searchPatientId" name="searchPatientId">
 				<div class="form-group">
 					<label class="control-label col-md-5 col-lg-5">Enter Patient Id</label>

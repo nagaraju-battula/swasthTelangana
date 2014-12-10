@@ -1,37 +1,60 @@
-<div class="login-form">&nbsp;&nbsp;Create account</div>
-<br />
+<div class="panel panel-default">
+	<div class="panel-heading">Create account</div>
+	<div class="panel-body">
+		<fieldset>
+			<form name="createaccount" id="createaccount"
+				commandName="createaccount" enctype="multipart/form-data"
+				method="POST" class="form-horizontal">
 
-<div class="login-form">
-	<form name="createaccount" id="createaccount" commandName="createaccount"
-		enctype="multipart/form-data" method="POST">
-		<div class="form-group">
-			<input type="text" class="form-control login-field" value=""
-				placeholder="Login id" name="loginId" id="loginId" /> <label
-				class="login-field-icon fui-user" for="login-name"></label>
-		</div>
-		<div class="form-group">
-			<input type="text" class="form-control login-field" value=""
-				placeholder="Display name" name="displayName" id="displayName" /> <label
-				class="login-field-icon fui-user" for="login-name"></label>
-		</div>
-		<div class="form-group">
-			<input type="text" class="form-control login-field" value=""
-				placeholder="Role" name="userRole" id="userRole" /> <label
-				class="login-field-icon fui-user" for="login-name"></label>
-		</div>
-		<div class="form-group">
-			<input type="password" class="form-control login-field" value=""
-				placeholder="Password" name="password" id="password" /> <label
-				class="login-field-icon fui-lock" for="login-pass"></label>
-		</div>
-		<div class="form-group">
-			<input type="password" class="form-control login-field" value=""
-				placeholder="Confirm password" name="conPassword" id="conPassword" /> <label
-				class="login-field-icon fui-lock" for="login-pass"></label>
-		</div>
-		
-		<a class="btn btn-primary btn-lg btn-block" href="#"
-			onclick="submitForm('/account/createaccountsubmission.action', 'createaccount', 'containerdiv');">Create new account</a> 
-			<span class="login-link">All fields are mandatory</span>
-	</form>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-lg-3">Login id</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control" value="" name="loginId"
+							id="loginId" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-lg-3">Display name</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control login-field" value=""
+							name="displayName" id="displayName" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-lg-3">Role</label>
+					<div class="col-md-6">
+						<select class="form-control login-field" id="userRole"
+							name="userRole">
+							<option class="login-field-icon fui-user"
+								value="HealthCenterUser">HealthCenterUser</option>
+							<option class="login-field-icon fui-user" value="DistrictUser">DistrictUser</option>
+							<option class="login-field-icon fui-user" value="StateUser">StateUser</option>
+							<option class="login-field-icon fui-user" value="Administrator">Administrator</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-lg-3">Password</label>
+					<div class="col-md-6">
+						<input type="password" class="form-control login-field" value=""
+							name="password" id="password" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-lg-3">Confirm
+						password</label>
+					<div class="col-md-6">
+						<input type="password" class="form-control login-field" value=""
+							name="conPassword" id="conPassword" />
+					</div>
+				</div>
+				
+					<a class="btn btn-primary btn-lg btn-block" href="#"
+						onclick="submitForm('/account/createaccountsubmission.action', 'createaccount', 'containerdiv');">Create
+						new account</a> <span class="login-link">All fields are
+						mandatory</span>
+				
+			</form>
+		</fieldset>
+	</div>
 </div>

@@ -59,7 +59,7 @@ public class AccountDaoImpl implements AccountDao {
 	public UserDetails getAccountDetails(LoginUser user) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		System.out.println("Data Source:"+dataSource);
-		String query = "SELECT F_LOGIN_ID, F_MOBILE_NUMBER, F_DISPLAY_NAME, F_ROLE FROM t_user_details WHERE TRIM(F_LOGIN_ID) = ? AND TRIM(F_PASSWORD) = ?";
+		String query = "SELECT F_LOGIN_ID, F_MOBILE_NUMBER, F_DISPLAY_NAME, F_ROLE FROM T_USER_DETAILS WHERE TRIM(F_LOGIN_ID) = ? AND TRIM(F_PASSWORD) = ?";
 		System.out.println("Data Source "+dataSource);
 		Object[] args = new Object[] { user.getUserName(), user.getPassword() };
 		try {
