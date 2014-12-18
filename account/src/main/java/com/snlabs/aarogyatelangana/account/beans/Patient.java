@@ -1,99 +1,99 @@
 package com.snlabs.aarogyatelangana.account.beans;
 
 import java.io.Serializable;
+import java.util.Date;
 
+public class Patient extends User implements Serializable {
 
-public class Patient extends User implements Serializable{
-
-	/**
-	 * Sekhar Karri
-	 */
 	private static final long serialVersionUID = 1L;
-	String patientName;
-	String gender;
-	String patientAddress;
-	String typeOfTest;
-	int price;
-	int discount;
-	int netAmount;
-	int contactNo;
+	private String patientName;
+	private int formId;
+	private int patientId;
+	private Date createdTimestamp;
 	private int age;
-	public String patientId;
-	public String formId;
-	
-	
-	public String getPatientId() {
+	private int txnID;
+	private String gender;
+	private int patientAddressID;
+	private PatientAddress patientAddress;
+
+	public int getPatientId() {
 		return patientId;
 	}
-	public void setPatientId(String patientId) {
+
+	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
+
 	public String getPatientName() {
 		return patientName;
 	}
+
 	public void setPatientName(String patientName) {
 		this.patientName = patientName;
 	}
+
 	public String getGender() {
 		return gender;
 	}
+
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getPatientAddress() {
-		return patientAddress;
-	}
-	public void setPatientAddress(String patientAddress) {
-		this.patientAddress = patientAddress;
-	}
-	public String getTypeOfTest() {
-		return typeOfTest;
-	}
-	public void setTypeOfTest(String typeOfTest) {
-		this.typeOfTest = typeOfTest;
-	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	public int getDiscount() {
-		return discount;
-	}
-	public void setDiscount(int discount) {
-		this.discount = discount;
-	}
-	public int getNetAmount() {
-		return netAmount;
-	}
-	public void setNetAmount(int netAmount) {
-		this.netAmount = netAmount;
-	}
-	public int getContactNo() {
-		return contactNo;
-	}
-	public void setContactNo(int contactNo) {
-		this.contactNo = contactNo;
-	}
-	public String getFormId() {
+
+	public int getFormId() {
 		return formId;
 	}
-	public void setFormId(String formId) {
+
+	public void setFormId(int formId) {
 		this.formId = formId;
 	}
+
 	public int getAge() {
 		return age;
 	}
+
 	public void setAge(int age) {
 		this.age = age;
 	}
+
+	public Date getCreatedTimestamp() {
+		return createdTimestamp;
+	}
+
+	public void setCreatedTimestamp(Date createdTimestamp) {
+		this.createdTimestamp = createdTimestamp;
+	}
+
+	public int getTxnID() {
+		return txnID;
+	}
+
+	public void setTxnID(int txnID) {
+		this.txnID = txnID;
+	}
+
+	public int getPatientAddressID() {
+		return patientAddressID;
+	}
+
+	public void setPatientAddressID(int patientAddressID) {
+		this.patientAddressID = patientAddressID;
+	}
+
+	public PatientAddress getPatientAddress() {
+		return patientAddress;
+	}
+
+	public void setPatientAddress(PatientAddress patientAddress) {
+		this.patientAddress = patientAddress;
+	}
+
 	@Override
 	public String toString() {
-		return "Patient [patientName=" + patientName + ", gender=" + gender
-				+ ", patientAddress=" + patientAddress + ", typeOfTest="
-				+ typeOfTest + ", price=" + price + ", discount=" + discount
-				+ ", netAmount=" + netAmount + ", contactNo=" + contactNo
-				+ ", patientId=" + patientId + "]";
+		return "Patient [patientName=" + patientName + ", formId=" + formId
+				+ ", patientId=" + patientId + ", createdTimestamp="
+				+ createdTimestamp + ", age=" + age + ", txnID=" + txnID
+				+ ", gender=" + gender + ", patientAddressID="
+				+ patientAddressID + "]";
 	}
 }

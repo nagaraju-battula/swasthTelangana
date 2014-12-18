@@ -10,19 +10,16 @@ import com.snlabs.aarogyatelangana.account.service.PatientService;
 public class PatientServiceImpl implements PatientService {
 
 	PatientDao patientDao;
-	
-	public static HashMap<String,String> patientSessionMap = new HashMap<String,String>();
+
+	public static HashMap<String, String> patientSessionMap = new HashMap<String, String>();
 
 	@Override
 	public int createPatientRecord(Patient patient) {
-      String patientId  = null;
-      String formId = null;
-		try{
-		  patientId = String.valueOf((new Random().nextInt(9999-1000)+1000));
-		  formId = String.valueOf((new Random().nextInt(9999-1000)+1000)+1);
-		  patient.setPatientId(patientId);
-		  patient.setFormId(formId);
-		}catch(Exception e){
+		try {
+			// formId = String.valueOf((new
+			// Random().nextInt(9999-1000)+1000)+1);
+			patient.setPatientId(new Random().nextInt(9999 - 1000) + 1000);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return patientDao.save(patient);

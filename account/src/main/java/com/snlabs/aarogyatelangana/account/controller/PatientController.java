@@ -20,7 +20,8 @@ public class PatientController {
 	public PatientService patientService;
 
 	@RequestMapping(value = { "enterPatientDetails.action" }, method = RequestMethod.POST)
-	public String enterPatientDetails() {
+	public String enterPatientDetails(HttpSession session) {
+		session.setAttribute("saveResult", null);
 		return "patientForm";
 	}
 
@@ -53,8 +54,7 @@ public class PatientController {
 	@RequestMapping(value = { "searchReportByPatientId.action" }, method = RequestMethod.POST)
 	public String searchReportByPatientId(@RequestBody Patient patient,
 			HttpSession session, ModelMap map) {
-		Integer patientId = Integer
-				.parseInt(patient.getPatientId());
+		Integer patientId = patient.getPatientId();
 		Patient resultForm = patientService.searchPatientById(patientId);		
 		session.setAttribute("form", resultForm);
 		session.setAttribute("patientId", patient.getPatientId());

@@ -1,20 +1,12 @@
 package com.snlabs.aarogyatelangana.account.beans;
 
 public class PatientAddress {
-	private int patientID;
-	private String address;
 	private String district;
 	private String state;
 	private int pincode;
 	private int contactno;
-
-	public int getPatientID() {
-		return patientID;
-	}
-
-	public void setPatientID(int patientID) {
-		this.patientID = patientID;
-	}
+	private int patientAddressID;
+	private String address;	
 
 	public String getAddress() {
 		return address;
@@ -56,10 +48,19 @@ public class PatientAddress {
 		this.contactno = contactno;
 	}
 
+	public int getPatientAddressID() {
+		return patientAddressID;
+	}
+
+	public void setPatientAddressID(int patientAddressID) {
+		this.patientAddressID = patientAddressID;
+	}
+
 	@Override
 	public String toString() {
-		return "PatientAddress [patientID=" + patientID + ", address="
-				+ address + ", district=" + district + ", state=" + state
-				+ ", pincode=" + pincode + ", contactno=" + contactno + "]";
+		return "PatientAddress [district=" + district + ", state=" + state
+				+ ", pincode=" + pincode + ", contactno=" + contactno
+				+ ", patientAddressID=" + patientAddressID + ", address="
+				+ address + "]";
 	}
 }

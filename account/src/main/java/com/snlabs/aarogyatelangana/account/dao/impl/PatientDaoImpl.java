@@ -1,37 +1,62 @@
 package com.snlabs.aarogyatelangana.account.dao.impl;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.snlabs.aarogyatelangana.account.beans.Form;
 import com.snlabs.aarogyatelangana.account.beans.Patient;
+import com.snlabs.aarogyatelangana.account.beans.PatientAddress;
 import com.snlabs.aarogyatelangana.account.beans.User;
 import com.snlabs.aarogyatelangana.account.dao.PatientDao;
-import com.snlabs.aarogyatelangana.account.service.impl.FormRowMapper;
 import com.snlabs.aarogyatelangana.account.service.impl.PatientRowMapper;
 
 public class PatientDaoImpl implements PatientDao {
 
-	private DataSource dataSource;
-	
+	DataSource dataSource;
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+
 	@Override
 	public int save(Patient patient) {
-		String insertPatientQuery = "Insert into t_patient(F_PATIENT_ID,F_FORM_ID,F_PATIENT_NAME,"
-				+ "F_PATIENT_ADDRESS,"
-				+ "F_PRICE,"
-				+ "F_DISCOUNT,"
-				+ "F_NETAMOUNT) " + "VALUES" + "(?,?,?,?,?,?,?)";
-		Object[] args = { patient.getPatientId(),patient.getFormId(),patient.getPatientName(),
-				patient.getPatientAddress(), patient.getPrice(),
-				patient.getDiscount(), patient.getNetAmount() };
-		JdbcTemplate template = new JdbcTemplate(dataSource);
+		String insertPatientQuery = "Insert into t_patient("
+				+ "F_PATIENT_NAME," + "F_PATIENT_ID," + "F_AGE," + "F_GENDER,"
+				+ "F_CREATED_TIMESTAMP" + ") " + "VALUES"
+				+ "(?,?,?,?,SYSDATE())";
+		Object[] args = { patient.getPatientName(), patient.getPatientId(),
+				patient.getAge(), patient.getGender() };
+		// JdbcTemplate template = new JdbcTemplate(dataSource);
 		try {
-			if(template.update(insertPatientQuery, args)>0){
-				return Integer.parseInt(patient.getPatientId());
-			}else{
+			if (jdbcTemplate.update(insertPatientQuery, args) > 0) {
+				savePatientAddress(patient.getPatientAddress());
+				return patient.getPatientId();
+			} else {
+				return 0;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	private int savePatientAddress(PatientAddress patientAddress) {
+		String insertPatientAddress = "Insert into t_patient_address("
+				+ "F_ADDRESS_ID," + "F_ADDRESS," + "F_CONTACT_NO,"
+				+ "F_DISTRICT," + "F_STATE," + "F_PINCODE" + ") " + "VALUES"
+				+ "(?,?,?,?,?,?)";
+		patientAddress
+				.setPatientAddressID(new Random().nextInt(9999 - 1000) + 2000);
+		Object[] args = { patientAddress.getPatientAddressID(),
+				patientAddress.getAddress().trim(),
+				patientAddress.getContactno(), patientAddress.getDistrict(),
+				patientAddress.getState(), patientAddress.getPincode() };
+		try {
+			if (jdbcTemplate.update(insertPatientAddress, args) > 0) {
+				return patientAddress.getPatientAddressID();
+			} else {
 				return 0;
 			}
 		} catch (Exception e) {
@@ -74,15 +99,17 @@ public class PatientDaoImpl implements PatientDao {
 
 	@Override
 	public Patient searchPatientById(int patientId) {
-		Patient patient  = null;
+		Patient patient = null;
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT * FROM t_patient WHERE F_PATIENT_ID=").append(patientId);
+		sb.append("SELECT * FROM t_patient WHERE F_PATIENT_ID=").append(
+				patientId);
 		JdbcTemplate template = new JdbcTemplate(dataSource);
 		try {
-			List<User> detailsList = template.queryForObject(sb.toString(), new PatientRowMapper());
-			for(User user:detailsList){
-				if(user instanceof Patient){
-					patient = (Patient)user;
+			List<User> detailsList = template.queryForObject(sb.toString(),
+					new PatientRowMapper());
+			for (User user : detailsList) {
+				if (user instanceof Patient) {
+					patient = (Patient) user;
 				}
 			}
 		} catch (Exception e) {
@@ -93,15 +120,17 @@ public class PatientDaoImpl implements PatientDao {
 
 	@Override
 	public Patient searchPatientByName(String patientName) {
-		Patient patient  = null;
+		Patient patient = null;
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT * FROM t_patient WHERE F_PATIENT_NAME='").append(patientName).append("'");
+		sb.append("SELECT * FROM t_patient WHERE F_PATIENT_NAME='")
+				.append(patientName).append("'");
 		JdbcTemplate template = new JdbcTemplate(dataSource);
 		try {
-			List<User> detailsList   = template.queryForObject(sb.toString(), new PatientRowMapper());
-			for(User user:detailsList){
-				if(user instanceof Patient){
-					patient = (Patient)user;
+			List<User> detailsList = template.queryForObject(sb.toString(),
+					new PatientRowMapper());
+			for (User user : detailsList) {
+				if (user instanceof Patient) {
+					patient = (Patient) user;
 				}
 			}
 		} catch (Exception e) {

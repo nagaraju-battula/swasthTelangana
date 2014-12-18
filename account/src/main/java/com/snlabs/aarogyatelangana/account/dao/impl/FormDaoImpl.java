@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.snlabs.aarogyatelangana.account.beans.Form;
@@ -14,11 +15,13 @@ import com.snlabs.aarogyatelangana.account.service.impl.FormRowMapper;
 public class FormDaoImpl implements FormDao {
 
 	private DataSource dataSource;
+	@Autowired
+	JdbcTemplate jdbcTemplate;
 
 	@Override
 	public int save(Form form) {
 		// Get the Form Id from patient Table using patient Name
-		
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT INTO t_form(").append("F_FORM_ID,F_PATIENT_NAME,")
 				.append("F_AGE,").append("F_NO_OF_CHILDREN,")
@@ -27,16 +30,15 @@ public class FormDaoImpl implements FormDao {
 				.append("F_MEDICAL_DISEASE,").append("F_PARENTAL_DIAGNOSIS,")
 				.append("F_GYNA_DETAILS");
 		sb.append(")VALUES(?,?,?,?,?,?,?,?,?,?,?)");
-		Object[] args = new Object[] { form.getFormID(),form.getPatientName(), form.getAge(),
-				form.getNoOfChildren(), form.getGuardianName(),
-				form.getPatientAddress(), 
-				form.getMenstrualPeriod(), form.getMedicalDisease(),
-				form.getParentalDiagnosis(), form.getGynecologistDetails()};
-		JdbcTemplate template = new JdbcTemplate(dataSource);
+		Object[] args = new Object[] { form.getFormID(), form.getPatientName(),
+				form.getAge(), form.getNoOfChildren(), form.getGuardianName(),
+				form.getPatientAddress(), form.getMenstrualPeriod(),
+				form.getMedicalDisease(), form.getParentalDiagnosis(),
+				form.getGynecologistDetails() };
 		try {
-			if(template.update(sb.toString(), args)>0){
+			if (jdbcTemplate.update(sb.toString(), args) > 0) {
 				return form.getFormID();
-			}else{
+			} else {
 				return 0;
 			}
 		} catch (Exception e) {
@@ -53,15 +55,15 @@ public class FormDaoImpl implements FormDao {
 
 	@Override
 	public Form findByFormId(int formId) {
-		Form form  = null;
+		Form form = null;
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT * FROM t_form WHERE F_FORM_ID=").append(formId);
-		JdbcTemplate template = new JdbcTemplate(dataSource);
 		try {
-			List<User> detailsList = template.queryForObject(sb.toString(), new FormRowMapper());
-			for(User user:detailsList){
-				if(user instanceof Form){
-					form = (Form)user;
+			List<User> detailsList = jdbcTemplate.queryForObject(sb.toString(),
+					new FormRowMapper());
+			for (User user : detailsList) {
+				if (user instanceof Form) {
+					form = (Form) user;
 				}
 			}
 		} catch (Exception e) {
@@ -92,20 +94,22 @@ public class FormDaoImpl implements FormDao {
 
 	@Override
 	public Form searchFormByDateRange(String fromDate, String toDate) {
-		Form form  = new Form();
-		//Date format should be YYYY-MONTH-DATE
-		StringBuilder sb = new StringBuilder();		
+		Form form = new Form();
+		// Date format should be YYYY-MONTH-DATE
+		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT * FROM t_form WHERE F_CREATED_TIMESTAMP BETWEEN ")
-			.append("STR_TO_DATE('").append(fromDate).append("','%Y-%m-%d') AND STR_TO_DATE('").append(toDate).append("','%Y-%m-%d')");			
-		JdbcTemplate template = new JdbcTemplate(dataSource);
-		try {			
-			List<User> detailsList = template.queryForObject(sb.toString(), new FormRowMapper());
-			if(detailsList.size()>0){
+				.append("STR_TO_DATE('").append(fromDate)
+				.append("','%Y-%m-%d') AND STR_TO_DATE('").append(toDate)
+				.append("','%Y-%m-%d')");
+		try {
+			List<User> detailsList = jdbcTemplate.queryForObject(sb.toString(),
+					new FormRowMapper());
+			if (detailsList.size() > 0) {
 				form.setFormbeans(detailsList);
-			}else{
+			} else {
 				form.setFormbeans(null);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
