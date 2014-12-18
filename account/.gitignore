@@ -16,3 +16,12 @@ target/
 
 # ignore .files
 *.zip
+
+#Ignore Less Files
+*.less
+
+#ignore font files
+fonts/
+
+#Ignore Users Directory
+Users/
