@@ -3919,7 +3919,7 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   border: none;
   border-radius: 6px;
   }
-@media (min-width: 768px) {
+@media (min-width: 1008px) {
   .navbar-header {
     float: left;
     }

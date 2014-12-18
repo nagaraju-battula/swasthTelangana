@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <meta charset="utf-8">
-<title>Aarogya telangana work desk</title>
+<title>Swasth telangana work desk</title>
 <meta name="description" content="Aarogya telangana work desk" />
 
 <meta name="viewport"
@@ -30,6 +29,9 @@
 <link
 	href="<%=request.getContextPath()%>/resources/docs/assets/css/demo.css"
 	rel="stylesheet">
+	
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/resources/dist/js/bootstrap/bootstrap.min.js"></script>
 
 <link rel="shortcut icon" href="img/favicon.ico">
 
@@ -43,7 +45,7 @@
 <body bgcolor="#edeff1">
 	<div class="container">
 		<br>
-		<div class="row demo-row">
+		<div class="row demo-row">		
 			<div class="col-xs-12">
 				<nav class="navbar navbar-inverse navbar-embossed" role="navigation">
 				<div class="navbar-header">
@@ -128,10 +130,4 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript">
-$(".dropdown-menu li a").click(function(){
-	  var selText = $(this).text();
-	  $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
-	});
-</script>
 </html>

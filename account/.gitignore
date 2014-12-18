@@ -15,4 +15,4 @@ target/
 .*
 
 # ignore .files
-.zip
+*.zip

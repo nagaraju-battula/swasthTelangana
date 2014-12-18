@@ -29,7 +29,7 @@ public class FormDaoImpl implements FormDao {
 		sb.append(")VALUES(?,?,?,?,?,?,?,?,?,?,?)");
 		Object[] args = new Object[] { form.getFormID(),form.getPatientName(), form.getAge(),
 				form.getNoOfChildren(), form.getGuardianName(),
-				form.getPatientAddress(), form.getReferralAddress(),
+				form.getPatientAddress(), 
 				form.getMenstrualPeriod(), form.getMedicalDisease(),
 				form.getParentalDiagnosis(), form.getGynecologistDetails()};
 		JdbcTemplate template = new JdbcTemplate(dataSource);

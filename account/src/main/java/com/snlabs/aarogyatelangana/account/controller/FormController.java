@@ -1,5 +1,7 @@
 package com.snlabs.aarogyatelangana.account.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +23,22 @@ public class FormController {
 	@RequestMapping(value = { "enterFormDetails.action" }, method = RequestMethod.POST)
 	public String enterFormDetails(HttpSession session) {
 		session.setAttribute("saveResult", null);
+		ArrayList<Integer> patientIDs = new ArrayList<Integer>();
+		patientIDs.add(123);
+		patientIDs.add(456);
+		
+		session.setAttribute("patientIDs",patientIDs);
 		return "form";
 	}
 
 	@RequestMapping(value = { "saveDetails.action" }, method = RequestMethod.POST)
 	public String saveFormDetails(@RequestBody Form form,HttpSession session,
 			ModelMap model) {
+		System.out.println(" form >> "+form.getClinicAddress().getClinicName());
+		System.out.println(" form >> "+form.getClinicAddress().getAddress());
+		System.out.println(" form >> "+form.getClinicAddress().getPincode());
+		System.out.println(" form >> "+form.getClinicAddress().getDistrict());
+		System.out.println(" form >> "+form.getClinicAddress().getState());
 		int formId = formService.createForm(form);
 		try{
 			if(formId >0){

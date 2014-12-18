@@ -17,8 +17,10 @@ public class Patient extends User implements Serializable{
 	int discount;
 	int netAmount;
 	int contactNo;
+	private int age;
 	public String patientId;
 	public String formId;
+	
 	
 	public String getPatientId() {
 		return patientId;
@@ -79,6 +81,12 @@ public class Patient extends User implements Serializable{
 	}
 	public void setFormId(String formId) {
 		this.formId = formId;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
 	}
 	@Override
 	public String toString() {
