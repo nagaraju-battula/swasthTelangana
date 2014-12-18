@@ -1,0 +1,10 @@
+#Ignore
+/target
+# Ignore Bin
+/bin/
+# Ignore
+*~
+#Ignore class files
+*.class
+#Ignore Zip Files
+*.zip
