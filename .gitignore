@@ -1,6 +1,29 @@
-#Ignore
-/target
-# Ignore Bin
-/bin/
-# Ignore
+# ignore all bin directories
+# matches "bin" in any subfolder
+bin/
+
+# ignore all target directories
+target/
+
+# ignore all files ending with ~
 *~
+
+# ignore .settings folder
+/.settings
+
+# ignore .files
+.*
+
+# ignore .files
+*.zip
+
+#Ignore Less Files
+*.less
+
+#ignore font files
+fonts/
+
+#Ignore Users Directory
+Users/
+
+/src/**/resources
