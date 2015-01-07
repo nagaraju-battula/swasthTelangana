@@ -5,26 +5,22 @@ package com.snlabs.aarogyatelangana.account.beans;
 
 /**
  * @author nbattula
- *
+ * 
  */
 public class UserDetails {
 
-	public String loginId;
-	public String displayName;
-	public String userRole;
-	public String lastlogin;
-	public String mobileNumber;
-	
-	public UserDetails() {
-		// TODO Auto-generated constructor stub
-	}
+	private static String loginId;
+	private String displayName;
+	private String userRole;
+	private String lastlogin;
+	private String mobileNumber;
 
-	public String getLoginId() {
+	public static String getLoginId() {
 		return loginId;
 	}
 
-	public void setLoginId(String loginId) {
-		this.loginId = loginId;
+	public static void setLoginId(String loginId) {
+		UserDetails.loginId = loginId;
 	}
 
 	public String getDisplayName() {
@@ -61,9 +57,9 @@ public class UserDetails {
 
 	@Override
 	public String toString() {
-		return "UserDetails [loginId=" + loginId + ", displayName="
-				+ displayName + ", userRole=" + userRole + ", lastlogin="
-				+ lastlogin + ", mobileNumber=" + mobileNumber + "]";
+		return "UserDetails [displayName=" + displayName + ", userRole="
+				+ userRole + ", lastlogin=" + lastlogin + ", mobileNumber="
+				+ mobileNumber + "]";
 	}
-	
+
 }

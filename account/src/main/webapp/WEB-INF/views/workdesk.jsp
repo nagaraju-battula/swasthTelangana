@@ -7,13 +7,13 @@
 <head>
 <meta charset="utf-8">
 <title>Swasth telangana work desk</title>
-<meta name="description" content="Aarogya telangana work desk" />
+<meta name="description" content="Swasth telangana work desk" />
 
 <meta name="viewport"
 	content="width=1000, initial-scale=1.0, maximum-scale=1.0">
 
 <script type="text/javascript"
-	src="<%=request.getContextPath()%>/resources/dist/js/vendor/jquery.js"></script>
+	src="<%=request.getContextPath()%>/resources/dist/js/vendor/jquery-2.1.3.js"></script>
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resources/dist/js/app/apputils.js"></script>
 
@@ -29,7 +29,7 @@
 <link
 	href="<%=request.getContextPath()%>/resources/docs/assets/css/demo.css"
 	rel="stylesheet">
-	
+
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resources/dist/js/bootstrap/bootstrap.min.js"></script>
 
@@ -45,7 +45,7 @@
 <body bgcolor="#edeff1">
 	<div class="container">
 		<br>
-		<div class="row demo-row">		
+		<div class="row demo-row">
 			<div class="col-xs-12">
 				<nav class="navbar navbar-inverse navbar-embossed" role="navigation">
 				<div class="navbar-header">
@@ -70,7 +70,7 @@
 							onclick="submitForm('/account/userAccounttab.action', 'NO-DATA', 'lhndiv');">Account<span
 								class="navbar-unread">1</span>
 						</a></li>
-						
+
 						<c:if test="${userDetails.userRole == 'Administrator'}">
 							<li><a href="#"
 								onclick="submitForm('/account/accountmanagementtab.action', 'NO-DATA', 'lhndiv');">Management<span
@@ -86,7 +86,7 @@
 							<ul class="dropdown-menu">
 								<li><a href="#">Action</a></li>
 								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
+								<li><a href="#">Link</a></li>
 								<li class="divider"></li>
 								<li><a href="#">Separated link</a></li>
 							</ul></li>
@@ -98,24 +98,23 @@
 								<span>
 									<button type="submit" class="btn"
 										onclick="submitForm('/account/home.action', 'NO-DATA', 'canvas');">
-										<span>Log out ${userDetails.displayName} </span>
+										<span>Log out:${userDetails.displayName} </span>
 									</button>
 								</span>
 							</div>
 						</div>
 					</form>
 				</div>
-				<!-- /.navbar-collapse --> </nav>
-				<!-- /navbar -->
+				</nav>
 			</div>
 		</div>
 		<!-- /row -->
 
-		<div class="row demo-samples" >
+		<div class="row demo-samples">
 			<div class="col-xs-4" id="lhndiv">
-				<%@ include file="patiententrylhn.jsp" %>
+				<%@ include file="patiententrylhn.jsp"%>
 			</div>
-			
+
 			<div class="col-xs-8, col-lg-8 col-md-8">
 				<div id="containerdiv">
 					<div class="login-form">

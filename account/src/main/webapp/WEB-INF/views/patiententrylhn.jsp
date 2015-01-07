@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 <div class="todo">
 	<div class="todo-search">
-		<span class="todo-search-field"> Select your option</span>
+		<span class="todo-search-field">Select your option</span>
 	</div>
 	<ul>
 		<li class="todo-done">
@@ -49,5 +49,14 @@ $(document).ready(function() {
 				</h4>
 			</div>
 		</li>
-	</ul>
+		<li>
+			<div class="todo-icon fui-eye"></div>
+			<div class="todo-content">
+				<h4 class="todo-name">
+					<a href="#"
+						onclick="submitForm('/account/patientProfiles.action', 'NO-DATA', 'containerdiv');"><strong><br>Patient Profiles</strong></a>
+				</h4>
+			</div>
+		</li>
+	</ul>	
 </div>

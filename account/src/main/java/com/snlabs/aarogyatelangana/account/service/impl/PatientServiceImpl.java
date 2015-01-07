@@ -1,6 +1,7 @@
 package com.snlabs.aarogyatelangana.account.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import com.snlabs.aarogyatelangana.account.beans.Patient;
@@ -16,13 +17,12 @@ public class PatientServiceImpl implements PatientService {
 	@Override
 	public int createPatientRecord(Patient patient) {
 		try {
-			// formId = String.valueOf((new
-			// Random().nextInt(9999-1000)+1000)+1);
 			patient.setPatientId(new Random().nextInt(9999 - 1000) + 1000);
+			return patientDao.save(patient);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return patientDao.save(patient);
+		return 0;
 	}
 
 	public PatientDao getPatientDao() {
@@ -50,6 +50,11 @@ public class PatientServiceImpl implements PatientService {
 	public static void setPatientSessionMap(
 			HashMap<String, String> patientSessionMap) {
 		PatientServiceImpl.patientSessionMap = patientSessionMap;
+	}
+
+	@Override
+	public List<Patient> getPatientProfiles(String createdBy) {
+		return patientDao.searchPatientProfilesByCreator(createdBy);
 	}
 
 }

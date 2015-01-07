@@ -1,5 +1,7 @@
 package com.snlabs.aarogyatelangana.account.service;
 
+import java.util.List;
+
 import com.snlabs.aarogyatelangana.account.beans.Patient;
 
 public interface PatientService {
@@ -9,4 +11,6 @@ public interface PatientService {
    public Patient searchPatientById(int patientId);
    
    public Patient searchPatientByName(String patientName);
+   
+   public List<Patient> getPatientProfiles(String createdBy);
 }

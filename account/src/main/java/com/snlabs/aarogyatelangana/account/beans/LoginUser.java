@@ -15,6 +15,16 @@ public class LoginUser implements Serializable{
 	
 	public String password;
 	
+	public String value_no;
+
+	public String getValue_no() {
+		return value_no;
+	}
+
+	public void setValue_no(String value_no) {
+		this.value_no = value_no;
+	}
+
 	public LoginUser() {
 		// TODO Auto-generated constructor stub
 	}

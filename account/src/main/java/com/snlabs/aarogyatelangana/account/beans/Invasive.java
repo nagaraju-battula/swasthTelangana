@@ -1,8 +1,10 @@
 package com.snlabs.aarogyatelangana.account.beans;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Invasive {
+public class Invasive extends FormF {
 
 	private int invasiveID;
 	private String doctorName;
@@ -16,6 +18,36 @@ public class Invasive {
 	private String procedureResult;
 	private Date procedureCarriedDate;
 	private String mtpIndication;
+	private String historyOfGeneticDisease;
+	private ConveyDetails conveyDetails;
+	private int patientID;
+	private String patientName;
+
+	private static Map<Integer, String> invasiveProcedures = new HashMap<Integer, String>();
+	private static Map<Integer, String> diagnosisBasis = new HashMap<Integer, String>();
+	private static Map<Integer, String> diagnosisIndication = new HashMap<Integer, String>();
+
+	static {
+		diagnosisBasis.put(1, "Clinical");
+		diagnosisBasis.put(2, "Bio-chemical");
+		diagnosisBasis.put(3, "Cytogenetic");
+		diagnosisBasis.put(4, "Other(e.g.radiological,ultrasonography)");
+
+		diagnosisIndication.put(1, "Chromosomal disorders");
+		diagnosisIndication.put(2, "Metabolic disorders");
+		diagnosisIndication.put(3, "Congenital anomaly");
+		diagnosisIndication.put(4, "Mental Disability");
+		diagnosisIndication.put(5, "Haemoglobinopathy");
+		diagnosisIndication.put(6, "Sex linked disorders");
+		diagnosisIndication.put(7, "Single gene disorder");
+		diagnosisIndication.put(8, "Single gene disorder");
+
+		invasiveProcedures.put(1, "Amniocentesis");
+		invasiveProcedures.put(2, "Chorionic Villi aspiration");
+		invasiveProcedures.put(3, "Fetal biopsy");
+		invasiveProcedures.put(4, "Cordocentesis");
+
+	}
 
 	public int getInvasiveID() {
 		return invasiveID;
@@ -111,6 +143,64 @@ public class Invasive {
 
 	public void setMtpIndication(String mtpIndication) {
 		this.mtpIndication = mtpIndication;
+	}
+
+	public String getHistoryOfGeneticDisease() {
+		return historyOfGeneticDisease;
+	}
+
+	public void setHistoryOfGeneticDisease(String historyOfGeneticDisease) {
+		this.historyOfGeneticDisease = historyOfGeneticDisease;
+	}
+
+	public static Map<Integer, String> getDiagnosisBasis() {
+		return diagnosisBasis;
+	}
+
+	public static void setDiagnosisBasis(Map<Integer, String> diagnosisBasis) {
+		Invasive.diagnosisBasis = diagnosisBasis;
+	}
+
+	public static Map<Integer, String> getDiagnosisIndication() {
+		return diagnosisIndication;
+	}
+
+	public static void setDiagnosisIndication(
+			Map<Integer, String> diagnosisIndication) {
+		Invasive.diagnosisIndication = diagnosisIndication;
+	}
+
+	public ConveyDetails getConveyDetails() {
+		return conveyDetails;
+	}
+
+	public void setConveyDetails(ConveyDetails conveyDetails) {
+		this.conveyDetails = conveyDetails;
+	}
+
+	public static Map<Integer, String> getInvasiveProcedures() {
+		return invasiveProcedures;
+	}
+
+	public static void setInvasiveProcedures(
+			Map<Integer, String> invasiveProcedures) {
+		Invasive.invasiveProcedures = invasiveProcedures;
+	}
+
+	public int getPatientID() {
+		return patientID;
+	}
+
+	public void setPatientID(int patientID) {
+		this.patientID = patientID;
+	}
+
+	public String getPatientName() {
+		return patientName;
+	}
+
+	public void setPatientName(String patientName) {
+		this.patientName = patientName;
 	}
 
 	@Override

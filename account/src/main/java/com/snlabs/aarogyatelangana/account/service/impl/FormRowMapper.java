@@ -10,25 +10,25 @@ import org.springframework.jdbc.core.RowMapper;
 import com.snlabs.aarogyatelangana.account.beans.Form;
 import com.snlabs.aarogyatelangana.account.beans.User;
 
-public class FormRowMapper implements RowMapper{
-	Form form  = null;
+public class FormRowMapper implements RowMapper {
+	Form form = null;
 	List<User> detailsList = new ArrayList<User>();
+
 	@Override
 	public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-		do{    
-			    form= new Form();
+		try {
+			do {
+				form = new Form();
 				form.setPatientName(rs.getString("F_PATIENT_NAME"));
-				form.setFormID(rs.getInt("F_FORM_ID"));
+				form.setFormID(rs.getInt("F_PATIENT_ID"));
 				form.setAge(rs.getInt("F_AGE"));
-				form.setGuardianName(rs.getString("F_GUARDIAN_NAME"));
-				form.setPatientAddress(rs.getString("F_PATIENT_ADDRESS"));
-				form.setReferralAddress(rs.getString("F_REFERRAL_ADDRESS"));
-				form.setMenstrualPeriod(rs.getInt("F_MENSTRUAL_PERIOD"));
-				form.setMedicalDisease(rs.getString("F_MEDICAL_DISEASE"));
-				form.setParentalDiagnosis(rs.getString("F_PARENTAL_DIAGNOSIS"));
-				form.setGynecologistDetails(rs.getString("F_GYNA_DETAILS"));
+				form.setGender(rs.getString("F_GENDER"));
+				form.setNoOfChildren(rs.getInt("F_NO_OF_CHILDREN"));
 				detailsList.add(form);
-		}while(rs.next());
+			} while (rs.next());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return detailsList;
 	}
 }

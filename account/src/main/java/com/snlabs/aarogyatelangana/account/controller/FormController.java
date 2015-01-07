@@ -2,91 +2,195 @@ package com.snlabs.aarogyatelangana.account.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.snlabs.aarogyatelangana.account.beans.Declaration;
 import com.snlabs.aarogyatelangana.account.beans.Form;
+import com.snlabs.aarogyatelangana.account.beans.Invasive;
+import com.snlabs.aarogyatelangana.account.beans.NonInvasive;
+import com.snlabs.aarogyatelangana.account.beans.SectionA;
+import com.snlabs.aarogyatelangana.account.service.DownloadService;
 import com.snlabs.aarogyatelangana.account.service.FormService;
 
 @Controller
 public class FormController {
-	
+
 	@Autowired
 	public FormService formService;
+	
+	@Autowired
+	DownloadService downloadService;
 
 	@RequestMapping(value = { "enterFormDetails.action" }, method = RequestMethod.POST)
 	public String enterFormDetails(HttpSession session) {
 		session.setAttribute("saveResult", null);
 		ArrayList<Integer> patientIDs = new ArrayList<Integer>();
-		patientIDs.add(123);
-		patientIDs.add(456);
-		
-		session.setAttribute("patientIDs",patientIDs);
+		session.setAttribute("patientIDs", patientIDs);
 		return "form";
 	}
 
-	@RequestMapping(value = { "saveDetails.action" }, method = RequestMethod.POST)
-	public String saveFormDetails(@RequestBody Form form,HttpSession session,
-			ModelMap model) {
-		int formId = formService.createForm(form);
-		try{
-			if(formId >0){
-				model.put("saveResult", "Well done! You successfully saved the Form Details."+
-							"Keep this Form Id for future Reference:"+ formId);
-			}else{
-				model.put("saveResult", "Oh snap! Failed Please check the whether you created Patient Form for this Patient Name.");
-			}		  	
-		}catch(Exception e){
+	/*
+	 * save Form Details
+	 */
+
+	@RequestMapping(value = { "saveClinicDetails.action" }, method = RequestMethod.POST)
+	public String saveClinicDetails(@RequestBody Form form,
+			HttpSession session, ModelMap model) {
+		int result = formService.createForm(form);
+		try {
+			if (result > 0) {
+				model.put("patientID", form.getPatient().getPatientId());
+				model.put("patientName", form.getPatient().getPatientName());
+			} else {
+				model.put(
+						"saveResult",
+						"Oh snap! Failed Please check the whether you created Patient Form for this Patient Name.");
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
-		}	
-		return "form";
+		}
+		return "sectionA";
 	}
-	
-	@RequestMapping(value = {"searchReportByFormId.action"} ,method = RequestMethod.POST)
-	public String searchReportByFormId(@RequestBody Form form,HttpSession session,ModelMap map){
+
+	/*
+	 * Save SectionA details
+	 */
+
+	@RequestMapping(value = { "saveSectionA.action" }, method = RequestMethod.POST)
+	public String saveSectionADetails(@RequestBody SectionA sectionA,
+			HttpSession session, ModelMap model) {
+		int result = formService.saveSectionA(sectionA);
+		try {
+			if (result > 0) {
+				model.put("patientID", sectionA.getPatientID());
+				model.put("patientName", sectionA.getPatientName());
+				model.put("diagnoseDetails", NonInvasive.getDiagnoseDetails());
+				model.put("procedures", NonInvasive.getProcedures());
+
+			} else {
+				model.put(
+						"saveResult",
+						"Oh snap! Failed Please check the whether you created Patient Form for this Patient Name.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "nonInvasive";
+	}
+
+	/*
+	 * Save non Invasive Details
+	 */
+	@RequestMapping(value = { "saveNonInvasiveDetails.action" }, method = RequestMethod.POST)
+	public String saveNonInvasiveDetails(@RequestBody NonInvasive nonInvasive,
+			HttpSession session, ModelMap model) {
+		int formId = formService.saveNonInvasiveDetails(nonInvasive);
+		try {
+			if (formId > 0) {
+				model.put("patientID", nonInvasive.getPatientID());
+				model.put("patientName", nonInvasive.getPatientName());
+				model.put("diagnosisBasis", Invasive.getDiagnosisBasis());
+				model.put("diagnosisIndication",
+						Invasive.getDiagnosisIndication());
+				model.put("invasiveProcedures",
+						Invasive.getInvasiveProcedures());
+			} else {
+				model.put(
+						"saveResult",
+						"Oh snap! Failed Please check the whether you created Patient Form for this Patient Name.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "invasive";
+	}
+
+	/*
+	 * Save Invasive Details
+	 */
+	@RequestMapping(value = { "saveInvasiveDetails.action" }, method = RequestMethod.POST)
+	public String saveInvasiveDetails(@RequestBody Invasive invasive,
+			HttpSession session, ModelMap model) {
+		int formId = formService.saveInvasiveDetails(invasive);
+		try {
+			if (formId > 0) {
+				model.put("patientID", invasive.getPatientID());
+				model.put("patientName", invasive.getPatientName());
+				model.put("doctorName", invasive.getDoctorName());
+			} else {
+				model.put(
+						"saveResult",
+						"Oh snap! Failed Please check the whether you created Patient Form for this Patient Name.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "declaration";
+	}
+
+	@RequestMapping(value = { "searchReportByFormId.action" }, method = RequestMethod.POST)
+	public String searchReportByFormId(@RequestBody Form form,
+			HttpSession session, ModelMap map) {
 		int formId = Integer.parseInt(form.getSearchFormId());
-		session.setAttribute("formId",formId);
+		session.setAttribute("formId", formId);
 		session.setAttribute("patientId", null);
 		session.setAttribute("patientName", null);
 		Form resultForm = formService.searchForm(formId);
 		session.setAttribute("form", resultForm);
-		System.out.println(resultForm);
-		if(resultForm != null){
+		if (resultForm != null) {
 			return "viewFormResultform";
-		}else{
-			return "errorResultForm";			
+		} else {
+			return "errorResultForm";
 		}
 	}
-	@RequestMapping(value = {"searchReportByDateRange.action"} ,method = RequestMethod.POST)
-	public String searchReportByDateRange(@RequestBody Form form,HttpSession session,ModelMap map){
-		Form resultForm = formService.searchFormByDateRange(form.fromDate, form.toDate);
-		session.setAttribute("form", resultForm);
-		System.out.println(resultForm);
-		if(resultForm != null){
+
+	@RequestMapping(value = { "searchReportByDateRange.action" }, method = RequestMethod.POST)
+	public String searchReportByDateRange(@RequestBody Form form,
+			HttpSession session, ModelMap map) {
+		Form resultForm = formService.searchFormByDateRange(form.fromDate,
+				form.toDate);
+		if (resultForm != null) {
 			return "viewFormDateRangeResultform";
-		}else{
-			return "errorResultForm";			
+		} else {
+			map.put("Failed", "No Records Found Between These Dates");
+			return "formDateReport";
 		}
 	}
-	
+
 	@RequestMapping(value = { "viewFormDetails.action" }, method = RequestMethod.POST)
-	public String viewFormDetails(@RequestBody Form form,HttpSession session, ModelMap model) {
-		Form resultForm = formService.searchForm(Integer.parseInt(form.getSearchFormId()));
+	public String viewFormDetails(@RequestBody Form form, HttpSession session,
+			ModelMap model) {
+		Form resultForm = formService.searchForm(Integer.parseInt(form
+				.getSearchFormId()));
 		session.setAttribute("form", resultForm);
-		System.out.println(resultForm);
-		if(resultForm != null){
+		if (resultForm != null) {
 			return "viewResultform";
-		}else{
-			return "errorResultForm";			
+		} else {
+			return "errorResultForm";
 		}
 	}
-	
+
+	@RequestMapping(value = { "saveDeclarationDetails.action" }, method = RequestMethod.POST)
+	public String saveDeclaration(@RequestBody Declaration declaration,
+			HttpSession session, ModelMap model,HttpServletRequest request) {		
+		if (formService.saveDeclarationDetails(declaration) > 0) {
+			model.put("message", "Saved Successfully");
+			downloadService.downloadForm(request, session);
+			return "declaration";
+		} else {
+			model.put("message", "Failed");
+			return "failed";
+		}
+	}
 
 	public FormService getFormService() {
 		return formService;
@@ -94,5 +198,13 @@ public class FormController {
 
 	public void setFormService(FormService formService) {
 		this.formService = formService;
+	}
+	
+	public DownloadService getDownloadService() {
+		return downloadService;
+	}
+
+	public void setDownloadService(DownloadService downloadService) {
+		this.downloadService = downloadService;
 	}
 }

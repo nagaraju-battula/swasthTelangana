@@ -361,10 +361,10 @@
   content: "\e660";
   }
 body {
-  font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-size: 18px;
+  font-family: "Georgia", Helvetica, Arial, sans-serif;
+  font-size: 16px;
   line-height: 1.72222;
-  color: #428bca;
+  color: #121313;
   background-color: #fff;
   }
 a {
@@ -474,7 +474,7 @@ h6,
   }
 p {
   margin: 0 0 15px;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.72222;
   }
 .lead {
@@ -4254,11 +4254,11 @@ select[multiple].navbar-form .select2-search input[type="text"] {
   z-index: 10;
   width: 6px;
   height: 6px;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-family: "Georgia", Helvetica, Arial, sans-serif;
   font-size: 0;
   font-weight: 700;
   line-height: 1;
-  color: #fff;
+  color: #161617;
   text-align: center;
   background-color: #1abc9c;
   border-radius: 50%;
@@ -5492,7 +5492,7 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
   }
 .todo li {
   position: relative;
-  padding: 18px 42px 21px 25px;
+  padding: 10px 42px 21px 25px;
   margin-top: 2px;
   font-size: 14px;
   line-height: 1.214;
@@ -5546,9 +5546,9 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
   }
 .todo-search {
   position: relative;
-  padding: 19px 25px 20px;
-  color: #34495e;
-  background: #428bca;
+  padding: 15px 20px 20px;
+  color: #0F1010;
+  background: #F5F5F5;
   background-size: 16px 16px;
   border-radius: 6px 6px 0 0;
   }
@@ -5567,8 +5567,8 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
   padding: 5px 0;
   margin: 0;
   font-size: 19px;
-  font-weight: 700;
-  line-height: 23px;
+  font-weight: 500;
+  line-height: 12px;
   color: #FFFFF;
   text-indent: 0;
   background: none;
@@ -5712,7 +5712,7 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
   margin-bottom: 77px;
   color: #fff;
   background: url(../img/login/imac.png) 0 0 no-repeat;
-  background-size: 940px 778px;
+  background-size: 1172px 778px;
   }
 .login-screen {
   min-height: 473px;

@@ -7,6 +7,7 @@ public class ConveyDetails {
 	private int conveyID;
 	private String conveyedName;
 	private Date conveyedDate;
+	private int formID;
 
 	public int getPatientID() {
 		return patientID;
@@ -38,5 +39,13 @@ public class ConveyDetails {
 
 	public void setConveyID(int conveyID) {
 		this.conveyID = conveyID;
+	}
+
+	public int getFormID() {
+		return formID;
+	}
+
+	public void setFormID(int formID) {
+		this.formID = formID;
 	}
 }

@@ -40,7 +40,7 @@ public class DownloadDaoImpl implements DownloadDao {
 			HttpSession session) {
 		String fileId = null;
 		StringBuilder queryBuilder = new StringBuilder();
-		queryBuilder.append("SELECT * FROM t_form WHERE ");
+		queryBuilder.append("SELECT * FROM T_FORM WHERE ");
 		if (session.getAttribute("formId") != null) {
 			fileId = String.valueOf(session.getAttribute("formId"));
 			queryBuilder.append("F_FORM_ID = ").append(fileId);
@@ -84,13 +84,6 @@ public class DownloadDaoImpl implements DownloadDao {
 					cell = row.createCell(colnum);
 					cell.setCellValue((String) pe.getPatientName());
 					cell = row.createCell(++colnum);
-					cell.setCellValue((String) pe.getPatientAddress());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((Integer) pe.getPrice());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((Integer) pe.getDiscount());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((Integer) pe.getNetAmount());
 				}
 				if (user instanceof Form) {
 					form = (Form) user;
@@ -101,13 +94,7 @@ public class DownloadDaoImpl implements DownloadDao {
 					cell = row.createCell(++colnum);
 					cell.setCellValue((Integer) form.getNoOfChildren());
 					cell = row.createCell(++colnum);
-					cell.setCellValue((String) form.getGuardianName());
-					cell = row.createCell(++colnum);
 					cell.setCellValue((String) form.getPatientAddress());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((String) form.getReferralAddress());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((Integer) form.getMenstrualPeriod());
 					cell = row.createCell(++colnum);
 					cell.setCellValue((String) form.getMedicalDisease());
 					cell = row.createCell(++colnum);
@@ -130,7 +117,7 @@ public class DownloadDaoImpl implements DownloadDao {
 			HttpSession session) {
 		String fileId = null;
 		StringBuilder queryBuilder = new StringBuilder();
-		queryBuilder.append("SELECT * FROM t_patient WHERE ");
+		queryBuilder.append("SELECT * FROM T_PATIENT WHERE ");
 		if (session.getAttribute("patientId") != null) {
 			fileId = (String) session.getAttribute("patientId");
 			queryBuilder.append("F_PATIENT_ID = ").append(fileId);
@@ -165,41 +152,29 @@ public class DownloadDaoImpl implements DownloadDao {
 					cell = row.createCell(colnum);
 					cell.setCellValue((String) pe.getPatientName());
 					cell = row.createCell(++colnum);
-					cell.setCellValue((String) pe.getPatientAddress());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((Integer) pe.getPrice());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((Integer) pe.getDiscount());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((Integer) pe.getNetAmount());
+					if (user instanceof Form) {
+						form = (Form) user;
+						cell = row.createCell(colnum);
+						cell.setCellValue((String) form.getPatientName());
+						cell = row.createCell(++colnum);
+						cell.setCellValue((Integer) form.getAge());
+						cell = row.createCell(++colnum);
+						cell.setCellValue((Integer) form.getNoOfChildren());
+						cell = row.createCell(++colnum);
+						cell.setCellValue((String) form.getPatientAddress());
+						cell = row.createCell(++colnum);
+						cell.setCellValue((String) form.getMedicalDisease());
+						cell = row.createCell(++colnum);
+						cell.setCellValue((String) form.getParentalDiagnosis());
+						cell = row.createCell(++colnum);
+						cell.setCellValue((String) form
+								.getGynecologistDetails());
+					}
 				}
-				if (user instanceof Form) {
-					form = (Form) user;
-					cell = row.createCell(colnum);
-					cell.setCellValue((String) form.getPatientName());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((Integer) form.getAge());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((Integer) form.getNoOfChildren());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((String) form.getGuardianName());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((String) form.getPatientAddress());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((String) form.getReferralAddress());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((Integer) form.getMenstrualPeriod());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((String) form.getMedicalDisease());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((String) form.getParentalDiagnosis());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((String) form.getGynecologistDetails());
-				}
+				FileOutputStream fos = new FileOutputStream(new File(fullPath));
+				workBook.write(fos);
+				fos.close();
 			}
-			FileOutputStream fos = new FileOutputStream(new File(fullPath));
-			workBook.write(fos);
-			fos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -208,14 +183,23 @@ public class DownloadDaoImpl implements DownloadDao {
 
 	@Override
 	public File downloadDetails(HttpServletRequest request, HttpSession session) {
-		String filePath = "/resources/completeDetailsExcelReport.xls";
+		//String filePath = "/resources/completeDetailsExcelReport.xls";
+		String filePath = "D:\\home\\telangana\\213245\\sekhar.xls";
 		ServletContext context = request.getServletContext();
 		String appPath = context.getRealPath("");
 		System.out.println(" application path: " + appPath);
-		String fullPath = appPath + filePath;
-		File downloadFile = new File(fullPath);
-		String detailsQuery = "SELECT * FROM t_patient patient,"
-				+ "t_form formf" + " WHERE patient.f_form_id = formf.f_form_id";
+		//String fullPath = appPath + filePath;
+		String fullPath =  filePath;
+		File downloadFile = new File(filePath);
+		String detailsQuery = "select patient.F_PATIENT_NAME,"
+				+ "PATIENT.F_PATIENT_ID," + "PATIENT.F_AGE,"
+				+ "address.F_ADDRESS," + "formf.F_MEDICAL_DISEASE,"
+				+ "formf.F_PARENTAL_DIAGNOSIS," + "formf.F_GYNA_DETAILS  "
+				+ "from t_patient patient," + "t_form formf,"
+				+ "t_patient_address address  "
+				+ "where patient.f_patient_id = 4015  "
+				+ "and formf.f_patient_id = 4015  "
+				+ "and address.f_patient_id = 4015";
 		try {
 			List<User> detailsList = jdbcTemplate.queryForObject(detailsQuery,
 					new CompleteDetailsRowMapper());
@@ -226,40 +210,27 @@ public class DownloadDaoImpl implements DownloadDao {
 			Form form = null;
 			Patient pe = null;
 			// setWorkBookStyles(workBook);
+			int colnum = 0;
+			Cell cell = null;
 			prepareHeader(sheet.createRow(rownum), workBook);
 			Row row = sheet.createRow(++rownum);
-			for (User user : detailsList) {
-				int colnum = 0;
-				Cell cell = null;
+			for (User user : detailsList) {				
 				if (user instanceof Patient) {
 					pe = (Patient) user;
 					cell = row.createCell(colnum);
 					cell.setCellValue((String) pe.getPatientName());
 					cell = row.createCell(++colnum);
-					cell.setCellValue((String) pe.getPatientAddress());
+					cell.setCellValue((int) pe.getPatientId());
 					cell = row.createCell(++colnum);
-					cell.setCellValue((Integer) pe.getPrice());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((Integer) pe.getDiscount());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((Integer) pe.getNetAmount());
 				}
 				if (user instanceof Form) {
 					form = (Form) user;
 					cell = row.createCell(colnum);
-					cell.setCellValue((String) form.getPatientName());
-					cell = row.createCell(++colnum);
 					cell.setCellValue((Integer) form.getAge());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((Integer) form.getNoOfChildren());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((String) form.getGuardianName());
 					cell = row.createCell(++colnum);
 					cell.setCellValue((String) form.getPatientAddress());
 					cell = row.createCell(++colnum);
-					cell.setCellValue((String) form.getReferralAddress());
-					cell = row.createCell(++colnum);
-					cell.setCellValue((Integer) form.getMenstrualPeriod());
+					cell.setCellValue((Integer) form.getNoOfChildren());
 					cell = row.createCell(++colnum);
 					cell.setCellValue((String) form.getMedicalDisease());
 					cell = row.createCell(++colnum);
@@ -295,12 +266,12 @@ public class DownloadDaoImpl implements DownloadDao {
 		CellStyle style = workBook.createCellStyle();
 		try {
 			row.createCell(colNum).setCellValue("PATIENT NAME");
-			row.createCell(++colNum).setCellValue("PATIENT ADDRESS");
-			row.createCell(++colNum).setCellValue("PRICE");
-			row.createCell(++colNum).setCellValue("DISCOUNT");
-			row.createCell(++colNum).setCellValue("NET AMOUNT");
-			row.createCell(++colNum).setCellValue("PATIENT NAME");
+			row.createCell(++colNum).setCellValue("PATIENT_ID");
 			row.createCell(++colNum).setCellValue("AGE");
+			row.createCell(++colNum).setCellValue("PATIENT ADDRESS");
+			row.createCell(++colNum).setCellValue("MEDICAL DISEASE");
+			row.createCell(++colNum).setCellValue("PARENTAL DIAGNOSIS");
+			row.createCell(++colNum).setCellValue("GYNA DETAILS");
 			row.createCell(++colNum).setCellValue("NO OF CHILDREN");
 			row.createCell(++colNum).setCellValue("GURDIAN NAME");
 			row.createCell(++colNum).setCellValue("PATIENT ADDRESS");

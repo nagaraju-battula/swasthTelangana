@@ -11,15 +11,12 @@ public class Form extends User {
 	int formID;
 	int clinicID;
 	int regID;
-	public String patientName;
+	public Patient patient;
+	private int clinicAddressID;
 	public int age;
-	public int noOfChildren;
-	private int noOfMaleKids;
-	private int noOfFemaleKids;
-	public String guardianName;
+	private String gender;
 	public String patientAddress;
 	private int referralAddressID;
-	public int menstrualPeriod;
 	public String medicalDisease;
 	public String parentalDiagnosis;
 	public String gynecologistDetails;
@@ -29,20 +26,13 @@ public class Form extends User {
 	private ReferralAddress referralAddress;
 	private ClinicAddress clinicAddress;
 	public static List<String> procedures = new ArrayList<String>();
-	private static List<Contact> contacts = new ArrayList<Contact>();
-	 
-    static {
-        contacts.add(new Contact("Barack", "Obama", "barack.o@whitehouse.com", "147-852-965"));
-        contacts.add(new Contact("George", "Bush", "george.b@whitehouse.com", "785-985-652"));
-        contacts.add(new Contact("Bill", "Clinton", "bill.c@whitehouse.com", "236-587-412"));
-        contacts.add(new Contact("Ronald", "Reagan", "ronald.r@whitehouse.com", "369-852-452"));
-    }
+	public String searchFormId;
+	private String patientName;
+    private int noOfChildren;
 	static {
 		procedures.add("Ultrasound");
 		procedures.add("Any other (specify)");
 	}
-
-	public String searchFormId;
 
 	public String getSearchFormId() {
 		return searchFormId;
@@ -50,14 +40,6 @@ public class Form extends User {
 
 	public void setSearchFormId(String searchFormId) {
 		this.searchFormId = searchFormId;
-	}
-
-	public String getPatientName() {
-		return patientName;
-	}
-
-	public void setPatientName(String patientName) {
-		this.patientName = patientName;
 	}
 
 	public int getAge() {
@@ -68,36 +50,12 @@ public class Form extends User {
 		this.age = age;
 	}
 
-	public int getNoOfChildren() {
-		return noOfChildren;
-	}
-
-	public void setNoOfChildren(int noOfChildren) {
-		this.noOfChildren = noOfChildren;
-	}
-
-	public String getGuardianName() {
-		return guardianName;
-	}
-
-	public void setGuardianName(String guardianName) {
-		this.guardianName = guardianName;
-	}
-
 	public String getPatientAddress() {
 		return patientAddress;
 	}
 
 	public void setPatientAddress(String patientAddress) {
 		this.patientAddress = patientAddress;
-	}
-
-	public int getMenstrualPeriod() {
-		return menstrualPeriod;
-	}
-
-	public void setMenstrualPeriod(int menstrualPeriod) {
-		this.menstrualPeriod = menstrualPeriod;
 	}
 
 	public String getMedicalDisease() {
@@ -130,6 +88,14 @@ public class Form extends User {
 
 	public void setGynecologistDetails(String gynecologistDetails) {
 		this.gynecologistDetails = gynecologistDetails;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getToDate() {
@@ -172,22 +138,6 @@ public class Form extends User {
 		this.regID = regID;
 	}
 
-	public int getNoOfMaleKids() {
-		return noOfMaleKids;
-	}
-
-	public void setNoOfMaleKids(int noOfMaleKids) {
-		this.noOfMaleKids = noOfMaleKids;
-	}
-
-	public int getNoOfFemaleKids() {
-		return noOfFemaleKids;
-	}
-
-	public void setNoOfFemaleKids(int noOfFemaleKids) {
-		this.noOfFemaleKids = noOfFemaleKids;
-	}
-
 	public static List<String> getProcedures() {
 		return procedures;
 	}
@@ -216,21 +166,54 @@ public class Form extends User {
 		this.referralAddress = referralAddress;
 	}
 
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	public int getClinicAddressID() {
+		return clinicAddressID;
+	}
+
+	public void setClinicAddressID(int clinicAddressID) {
+		this.clinicAddressID = clinicAddressID;
+	}
+
+	public String getPatientName() {
+		return patientName;
+	}
+
+	public void setPatientName(String patientName) {
+		this.patientName = patientName;
+	}
+
+	public ReferralAddress getReferralAddress() {
+		return referralAddress;
+	}
+
+	public int getNoOfChildren() {
+		return noOfChildren;
+	}
+
+	public void setNoOfChildren(int noOfChildren) {
+		this.noOfChildren = noOfChildren;
+	}
+
 	@Override
 	public String toString() {
 		return "Form [formID=" + formID + ", clinicID=" + clinicID + ", regID="
-				+ regID + ", patientName=" + patientName + ", age=" + age
-				+ ", noOfChildren=" + noOfChildren + ", noOfMaleKids="
-				+ noOfMaleKids + ", noOfFemaleKids=" + noOfFemaleKids
-				+ ", guardianName=" + guardianName + ", patientAddress="
+				+ regID + ", patient=" + patient + ", clinicAddressID="
+				+ clinicAddressID + ", age=" + age + ", patientAddress="
 				+ patientAddress + ", referralAddressID=" + referralAddressID
-				+ ", menstrualPeriod=" + menstrualPeriod + ", medicalDisease="
-				+ medicalDisease + ", parentalDiagnosis=" + parentalDiagnosis
-				+ ", gynecologistDetails=" + gynecologistDetails + ", toDate="
-				+ toDate + ", fromDate=" + fromDate + ", formbeans="
-				+ formbeans + ", referralAddress=" + referralAddress
-				+ ", clinicAddress=" + clinicAddress + ", searchFormId="
-				+ searchFormId + "]";
+				+ ", medicalDisease=" + medicalDisease + ", parentalDiagnosis="
+				+ parentalDiagnosis + ", gynecologistDetails="
+				+ gynecologistDetails + ", toDate=" + toDate + ", fromDate="
+				+ fromDate + ", formbeans=" + formbeans + ", referralAddress="
+				+ referralAddress + ", clinicAddress=" + clinicAddress
+				+ ", searchFormId=" + searchFormId + "]";
 	}
 
 }

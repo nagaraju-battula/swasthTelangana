@@ -1,17 +1,18 @@
 package com.snlabs.aarogyatelangana.account.dao.impl;
 
 import java.util.List;
-import java.util.Random;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import com.snlabs.aarogyatelangana.account.beans.Patient;
 import com.snlabs.aarogyatelangana.account.beans.PatientAddress;
 import com.snlabs.aarogyatelangana.account.beans.User;
 import com.snlabs.aarogyatelangana.account.dao.PatientDao;
+import com.snlabs.aarogyatelangana.account.service.impl.PatientProfileMapper;
 import com.snlabs.aarogyatelangana.account.service.impl.PatientRowMapper;
 
 public class PatientDaoImpl implements PatientDao {
@@ -22,16 +23,16 @@ public class PatientDaoImpl implements PatientDao {
 
 	@Override
 	public int save(Patient patient) {
-		String insertPatientQuery = "Insert into t_patient("
+		String insertPatientQuery = "INSERT INTO T_PATIENT("
 				+ "F_PATIENT_NAME," + "F_PATIENT_ID," + "F_AGE," + "F_GENDER,"
-				+ "F_CREATED_TIMESTAMP" + ") " + "VALUES"
-				+ "(?,?,?,?,SYSDATE())";
+				+ "F_CREATED_BY," + "F_CREATED_TIMESTAMP " + ") "
+				+ "VALUES(?,?,?,?,?,SYSDATE())";
 		Object[] args = { patient.getPatientName(), patient.getPatientId(),
-				patient.getAge(), patient.getGender() };
-		// JdbcTemplate template = new JdbcTemplate(dataSource);
+				patient.getAge(), patient.getGender(), patient.getCreatedBy() };
 		try {
 			if (jdbcTemplate.update(insertPatientQuery, args) > 0) {
-				savePatientAddress(patient.getPatientAddress());
+				savePatientAddress(patient.getPatientId(),
+						patient.getPatientAddress());
 				return patient.getPatientId();
 			} else {
 				return 0;
@@ -42,15 +43,12 @@ public class PatientDaoImpl implements PatientDao {
 		return 0;
 	}
 
-	private int savePatientAddress(PatientAddress patientAddress) {
-		String insertPatientAddress = "Insert into t_patient_address("
-				+ "F_ADDRESS_ID," + "F_ADDRESS," + "F_CONTACT_NO,"
+	private int savePatientAddress(int patientID, PatientAddress patientAddress) {
+		String insertPatientAddress = "INSERT INTO T_PATIENT_ADDRESS("
+				+ "F_PATIENT_ID," + "F_ADDRESS," + "F_CONTACT_NO,"
 				+ "F_DISTRICT," + "F_STATE," + "F_PINCODE" + ") " + "VALUES"
 				+ "(?,?,?,?,?,?)";
-		patientAddress
-				.setPatientAddressID(new Random().nextInt(9999 - 1000) + 2000);
-		Object[] args = { patientAddress.getPatientAddressID(),
-				patientAddress.getAddress().trim(),
+		Object[] args = { patientID, patientAddress.getAddress().trim(),
 				patientAddress.getContactno(), patientAddress.getDistrict(),
 				patientAddress.getState(), patientAddress.getPincode() };
 		try {
@@ -101,11 +99,10 @@ public class PatientDaoImpl implements PatientDao {
 	public Patient searchPatientById(int patientId) {
 		Patient patient = null;
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT * FROM t_patient WHERE F_PATIENT_ID=").append(
+		sb.append("SELECT * FROM T_PATIENT WHERE F_PATIENT_ID=").append(
 				patientId);
-		JdbcTemplate template = new JdbcTemplate(dataSource);
 		try {
-			List<User> detailsList = template.queryForObject(sb.toString(),
+			List<User> detailsList = jdbcTemplate.queryForObject(sb.toString(),
 					new PatientRowMapper());
 			for (User user : detailsList) {
 				if (user instanceof Patient) {
@@ -122,11 +119,10 @@ public class PatientDaoImpl implements PatientDao {
 	public Patient searchPatientByName(String patientName) {
 		Patient patient = null;
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT * FROM t_patient WHERE F_PATIENT_NAME='")
+		sb.append("SELECT * FROM T_PATIENT WHERE F_PATIENT_NAME='")
 				.append(patientName).append("'");
-		JdbcTemplate template = new JdbcTemplate(dataSource);
 		try {
-			List<User> detailsList = template.queryForObject(sb.toString(),
+			List<User> detailsList = jdbcTemplate.queryForObject(sb.toString(),
 					new PatientRowMapper());
 			for (User user : detailsList) {
 				if (user instanceof Patient) {
@@ -137,6 +133,24 @@ public class PatientDaoImpl implements PatientDao {
 			e.printStackTrace();
 		}
 		return patient;
+	}
+
+	@Override
+	public List<Patient> searchPatientProfilesByCreator(String createdBy) {
+		StringBuilder sb = new StringBuilder();
+		List<Patient> detailsList = null;
+		sb.append(
+				"SELECT F_PATIENT_ID," + "F_PATIENT_NAME,"
+						+ "F_CREATED_TIMESTAMP," + "F_DOWNLOAD_PATH"
+						+ " FROM T_PATIENT WHERE F_CREATED_BY='")
+				.append(createdBy).append("'");
+		try {
+			detailsList = jdbcTemplate.queryForObject(sb.toString(),
+					new PatientProfileMapper());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return detailsList;
 	}
 
 }

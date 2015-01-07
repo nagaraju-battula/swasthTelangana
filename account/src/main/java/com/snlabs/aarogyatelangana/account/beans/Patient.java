@@ -15,6 +15,8 @@ public class Patient extends User implements Serializable {
 	private String gender;
 	private int patientAddressID;
 	private PatientAddress patientAddress;
+	private String createdBy;
+	private String formFDownloadPath;
 
 	public int getPatientId() {
 		return patientId;
@@ -86,6 +88,22 @@ public class Patient extends User implements Serializable {
 
 	public void setPatientAddress(PatientAddress patientAddress) {
 		this.patientAddress = patientAddress;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getFormFDownloadPath() {
+		return formFDownloadPath;
+	}
+
+	public void setFormFDownloadPath(String formFDownloadPath) {
+		this.formFDownloadPath = formFDownloadPath;
 	}
 
 	@Override
