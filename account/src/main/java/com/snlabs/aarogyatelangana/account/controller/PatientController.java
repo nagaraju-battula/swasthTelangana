@@ -1,9 +1,8 @@
 package com.snlabs.aarogyatelangana.account.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
+import com.snlabs.aarogyatelangana.account.beans.Patient;
+import com.snlabs.aarogyatelangana.account.beans.UserDetails;
+import com.snlabs.aarogyatelangana.account.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.snlabs.aarogyatelangana.account.beans.Patient;
-import com.snlabs.aarogyatelangana.account.beans.UserDetails;
-import com.snlabs.aarogyatelangana.account.service.PatientService;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class PatientController {

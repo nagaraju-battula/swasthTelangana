@@ -1,19 +1,16 @@
 package com.snlabs.aarogyatelangana.account.dao.impl;
 
-import java.util.List;
-
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-
 import com.snlabs.aarogyatelangana.account.beans.Patient;
 import com.snlabs.aarogyatelangana.account.beans.PatientAddress;
 import com.snlabs.aarogyatelangana.account.beans.User;
 import com.snlabs.aarogyatelangana.account.dao.PatientDao;
 import com.snlabs.aarogyatelangana.account.service.impl.PatientProfileMapper;
 import com.snlabs.aarogyatelangana.account.service.impl.PatientRowMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import javax.sql.DataSource;
+import java.util.List;
 
 public class PatientDaoImpl implements PatientDao {
 

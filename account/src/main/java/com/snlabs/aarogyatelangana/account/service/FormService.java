@@ -1,10 +1,6 @@
 package com.snlabs.aarogyatelangana.account.service;
 
-import com.snlabs.aarogyatelangana.account.beans.Declaration;
-import com.snlabs.aarogyatelangana.account.beans.Form;
-import com.snlabs.aarogyatelangana.account.beans.Invasive;
-import com.snlabs.aarogyatelangana.account.beans.NonInvasive;
-import com.snlabs.aarogyatelangana.account.beans.SectionA;
+import com.snlabs.aarogyatelangana.account.beans.*;
 
 public interface FormService {
 	public int createForm(Form form);

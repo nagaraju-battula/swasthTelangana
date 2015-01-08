@@ -2,7 +2,6 @@ package com.snlabs.aarogyatelangana.account.service;
 
 import com.snlabs.aarogyatelangana.account.beans.LoginUser;
 import com.snlabs.aarogyatelangana.account.beans.NewUser;
-import com.snlabs.aarogyatelangana.account.beans.Patient;
 import com.snlabs.aarogyatelangana.account.beans.UserDetails;
 import com.snlabs.aarogyatelangana.account.dao.AccountDao;
 

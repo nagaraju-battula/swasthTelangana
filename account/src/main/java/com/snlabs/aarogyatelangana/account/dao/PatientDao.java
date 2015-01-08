@@ -1,8 +1,8 @@
 package com.snlabs.aarogyatelangana.account.dao;
 
-import java.util.List;
-
 import com.snlabs.aarogyatelangana.account.beans.Patient;
+
+import java.util.List;
 
 public interface PatientDao {
      public int save(Patient patient);

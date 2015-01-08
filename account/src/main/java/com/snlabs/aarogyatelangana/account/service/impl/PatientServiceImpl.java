@@ -1,12 +1,12 @@
 package com.snlabs.aarogyatelangana.account.service.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
-
 import com.snlabs.aarogyatelangana.account.beans.Patient;
 import com.snlabs.aarogyatelangana.account.dao.PatientDao;
 import com.snlabs.aarogyatelangana.account.service.PatientService;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 public class PatientServiceImpl implements PatientService {
 

@@ -1,8 +1,8 @@
 package com.snlabs.aarogyatelangana.account.service;
 
-import java.util.List;
-
 import com.snlabs.aarogyatelangana.account.beans.Patient;
+
+import java.util.List;
 
 public interface PatientService {
 	//Insert patient details into the DB and returns the patient ID 

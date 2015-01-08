@@ -1,15 +1,14 @@
 package com.snlabs.aarogyatelangana.account.service.impl;
 
+import com.snlabs.aarogyatelangana.account.beans.Form;
+import com.snlabs.aarogyatelangana.account.beans.Patient;
+import com.snlabs.aarogyatelangana.account.beans.User;
+import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.jdbc.core.RowMapper;
-
-import com.snlabs.aarogyatelangana.account.beans.Form;
-import com.snlabs.aarogyatelangana.account.beans.Patient;
-import com.snlabs.aarogyatelangana.account.beans.User;
 
 public class CompleteDetailsRowMapper implements RowMapper {
 

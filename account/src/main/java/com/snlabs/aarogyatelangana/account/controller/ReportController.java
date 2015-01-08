@@ -1,16 +1,12 @@
 package com.snlabs.aarogyatelangana.account.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
+import com.snlabs.aarogyatelangana.account.beans.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.snlabs.aarogyatelangana.account.beans.UserDetails;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class ReportController {

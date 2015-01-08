@@ -1,25 +1,18 @@
 package com.snlabs.aarogyatelangana.account.controller;
 
-import java.util.ArrayList;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import com.snlabs.aarogyatelangana.account.beans.*;
+import com.snlabs.aarogyatelangana.account.service.DownloadService;
+import com.snlabs.aarogyatelangana.account.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.snlabs.aarogyatelangana.account.beans.Declaration;
-import com.snlabs.aarogyatelangana.account.beans.Form;
-import com.snlabs.aarogyatelangana.account.beans.Invasive;
-import com.snlabs.aarogyatelangana.account.beans.NonInvasive;
-import com.snlabs.aarogyatelangana.account.beans.SectionA;
-import com.snlabs.aarogyatelangana.account.service.DownloadService;
-import com.snlabs.aarogyatelangana.account.service.FormService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @Controller
 public class FormController {
