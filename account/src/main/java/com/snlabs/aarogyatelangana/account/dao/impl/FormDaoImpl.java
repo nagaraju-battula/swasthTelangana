@@ -115,7 +115,7 @@ public class FormDaoImpl implements FormDao {
 				.append("','%Y-%m-%d') AND STR_TO_DATE('").append(toDate)
 				.append("','%Y-%m-%d')");
 		try {
-			List<Integer> patientIDs = jdbcTemplate.queryForObject(
+			List<Integer> patientIDs = (List<Integer>)jdbcTemplate.queryForObject(
 					sb.toString(), new PatientIDsMapper());
 			if (patientIDs.size() > 0) {
 				StringBuilder getResult = new StringBuilder();
@@ -128,7 +128,7 @@ public class FormDaoImpl implements FormDao {
 								+ patientIDs.get(0)
 								+ " AND patient.f_patient_id<="
 								+ patientIDs.get(patientIDs.size() - 1));
-				List<User> formBeans = jdbcTemplate.queryForObject(
+				List<User> formBeans = (List<User>)jdbcTemplate.queryForObject(
 						getResult.toString(), new FormRowMapper());
 				form = new Form();
 				form.setFormbeans(formBeans);

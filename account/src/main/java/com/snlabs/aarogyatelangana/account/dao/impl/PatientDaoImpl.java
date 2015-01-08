@@ -99,7 +99,7 @@ public class PatientDaoImpl implements PatientDao {
 		sb.append("SELECT * FROM T_PATIENT WHERE F_PATIENT_ID=").append(
 				patientId);
 		try {
-			List<User> detailsList = jdbcTemplate.queryForObject(sb.toString(),
+			List<User> detailsList = (List<User>)jdbcTemplate.queryForObject(sb.toString(),
 					new PatientRowMapper());
 			for (User user : detailsList) {
 				if (user instanceof Patient) {
@@ -119,7 +119,7 @@ public class PatientDaoImpl implements PatientDao {
 		sb.append("SELECT * FROM T_PATIENT WHERE F_PATIENT_NAME='")
 				.append(patientName).append("'");
 		try {
-			List<User> detailsList = jdbcTemplate.queryForObject(sb.toString(),
+			List<User> detailsList = (List<User>)jdbcTemplate.queryForObject(sb.toString(),
 					new PatientRowMapper());
 			for (User user : detailsList) {
 				if (user instanceof Patient) {
@@ -142,7 +142,7 @@ public class PatientDaoImpl implements PatientDao {
 						+ " FROM T_PATIENT WHERE F_CREATED_BY='")
 				.append(createdBy).append("'");
 		try {
-			detailsList = jdbcTemplate.queryForObject(sb.toString(),
+			detailsList = (List<Patient>)jdbcTemplate.queryForObject(sb.toString(),
 					new PatientProfileMapper());
 		} catch (Exception e) {
 			e.printStackTrace();
