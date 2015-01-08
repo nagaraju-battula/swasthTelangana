@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="apputils">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/resources/htdocs/dist/js/app/apputils.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

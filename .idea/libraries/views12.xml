@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="views1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/target/account-v1/WEB-INF/views.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

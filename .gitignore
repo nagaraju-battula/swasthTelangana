@@ -12,9 +12,6 @@ target/
 /.settings
 
 # ignore .files
-.*
-
-# ignore .files
 *.zip
 
 #Ignore Less Files
@@ -26,4 +23,8 @@ fonts/
 #Ignore Users Directory
 Users/
 
-/src/**/resources
+#Ignore class files
+*.class
+
+#Ignore out files
+*.out
