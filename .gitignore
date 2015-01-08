@@ -31,3 +31,6 @@ Users/
 
 #Ignore out files
 *.out
+
+#Ignore war files
+*.war
