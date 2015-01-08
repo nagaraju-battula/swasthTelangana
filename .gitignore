@@ -9,7 +9,7 @@ target/
 *~
 
 # ignore .idea folder
-.idea/
+/.idea/
 
 # ignore .settings folder
 .settings/
