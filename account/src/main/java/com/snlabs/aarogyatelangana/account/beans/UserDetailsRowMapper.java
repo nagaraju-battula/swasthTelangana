@@ -1,17 +1,11 @@
-/**
- * 
- */
+
 package com.snlabs.aarogyatelangana.account.beans;
+
+import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.jdbc.core.RowMapper;
-
-/**
- * @author nbattula
- * 
- */
 public class UserDetailsRowMapper implements RowMapper {
 	@Override
 	public Object mapRow(ResultSet rs, int rowNum) throws SQLException {

@@ -1,12 +1,7 @@
-/**
- * 
- */
+
 package com.snlabs.aarogyatelangana.account.beans;
 
-/**
- * @author nbattula
- * 
- */
+
 public class UserDetails {
 
 	private static String loginId;

@@ -1,12 +1,5 @@
-/**
- * 
- */
-package com.snlabs.aarogyatelangana.account.controller;
 
-/**
- * @author nbattula
- *
- */
+package com.snlabs.aarogyatelangana.account.controller;
 import java.util.HashMap;
 import java.util.Map;
 

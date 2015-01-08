@@ -1,14 +1,5 @@
-/**
- * 
- */
 package com.snlabs.aarogyatelangana.account.beans;
-
 import java.io.Serializable;
-
-/**
- * @author nbattula
- *
- */
 public class NewUser implements Serializable{
 	
 	public String loginId;

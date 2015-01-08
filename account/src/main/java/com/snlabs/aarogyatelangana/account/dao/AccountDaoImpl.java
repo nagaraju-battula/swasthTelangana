@@ -1,23 +1,14 @@
-/**
- * 
- */
+
 package com.snlabs.aarogyatelangana.account.dao;
-
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import com.snlabs.aarogyatelangana.account.beans.LoginUser;
 import com.snlabs.aarogyatelangana.account.beans.NewUser;
 import com.snlabs.aarogyatelangana.account.beans.UserDetails;
 import com.snlabs.aarogyatelangana.account.beans.UserDetailsRowMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
-/**
- * @author nbattula
- * 
- */
+import javax.sql.DataSource;
+
 public class AccountDaoImpl implements AccountDao {
 
 	private DataSource dataSource;
