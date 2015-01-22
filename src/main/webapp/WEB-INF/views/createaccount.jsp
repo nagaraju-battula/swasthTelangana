@@ -48,12 +48,12 @@
 							name="conPassword" id="conPassword" />
 					</div>
 				</div>
-				
-					<a class="btn btn-primary btn-lg btn-block" href="#"
-						onclick="submitForm('/account/createaccountsubmission.action', 'createaccount', 'containerdiv');">Create
-						new account</a> <span class="login-link">All fields are
-						mandatory</span>
-				
+
+				<a class="btn btn-primary btn-lg btn-block" href="#"
+					onclick="submitForm('/account/createaccountsubmission.action', 'createaccount', 'containerdiv');">Create
+					new account</a> <span class="login-link">All fields are
+					mandatory</span>
+
 			</form>
 		</fieldset>
 	</div>

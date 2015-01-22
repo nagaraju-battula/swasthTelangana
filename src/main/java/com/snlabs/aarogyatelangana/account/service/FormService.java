@@ -3,17 +3,28 @@ package com.snlabs.aarogyatelangana.account.service;
 import com.snlabs.aarogyatelangana.account.beans.*;
 
 public interface FormService {
-	public int createForm(Form form);
+    public ClinicAddress saveClinicDetails(ClinicAddress clinicAddress);
 
-	public Form searchForm(int formId);
+    public Form searchForm(int formId);
 
-	public Form searchFormByDateRange(String fromDate, String toDate);
+    public Form searchFormByDateRange(String fromDate, String toDate);
 
-	public int saveSectionA(SectionA section);
+    public SectionA saveSectionA(SectionA section);
 
-	public int saveNonInvasiveDetails(NonInvasive nonInvasive);
+    public NonInvasive saveNonInvasiveDetails(NonInvasive nonInvasive);
 
-	public int saveInvasiveDetails(Invasive invasive);
-	
-	public int saveDeclarationDetails(Declaration declaration);
+    public Invasive saveInvasiveDetails(Invasive invasive);
+
+    public Declaration saveDeclarationDetails(Declaration declaration);
+
+    public Patient getPatientDetails(int patientID);
+
+    public SectionA getSectionADetails(int patientID);
+
+    public ClinicAddress getClinicDetails(int patientID);
+
+    public NonInvasive getNonInvasiveDetails(int patientID);
+
+    public Invasive getInvasiveDetails(int patientID);
+
 }

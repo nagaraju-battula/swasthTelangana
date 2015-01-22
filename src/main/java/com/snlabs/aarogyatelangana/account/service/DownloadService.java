@@ -6,5 +6,5 @@ import java.io.File;
 
 public interface DownloadService {
      
-	public File downloadForm(HttpServletRequest request,HttpSession session);
+	public File downloadForm(int patientID, HttpServletRequest request,HttpSession session);
 }

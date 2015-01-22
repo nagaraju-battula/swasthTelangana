@@ -5,7 +5,7 @@ import com.snlabs.aarogyatelangana.account.beans.Patient;
 import java.util.List;
 
 public interface PatientDao {
-     public int save(Patient patient);
+     public Patient save(Patient patient);
      public boolean update(Patient patient);
      public Patient findByPatientName(String patient);
      public boolean delete(Patient patient);

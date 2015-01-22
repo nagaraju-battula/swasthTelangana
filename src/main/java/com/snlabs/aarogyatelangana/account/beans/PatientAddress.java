@@ -1,14 +1,25 @@
 package com.snlabs.aarogyatelangana.account.beans;
 
-public class PatientAddress {
+import java.io.Serializable;
+
+public class PatientAddress implements Serializable{
 	private String district;
 	private String state;
 	private int pincode;
 	private int contactno;
 	private int patientAddressID;
-	private String address;	
+	private String address;
+    private String currentAddress;
 
-	public String getAddress() {
+    public String getCurrentAddress() {
+        return currentAddress;
+    }
+
+    public void setCurrentAddress(String currentAddress) {
+        this.currentAddress = currentAddress;
+    }
+
+    public String getAddress() {
 		return address;
 	}
 
@@ -57,10 +68,10 @@ public class PatientAddress {
 	}
 
 	@Override
-	public String toString() {
-		return "PatientAddress [district=" + district + ", state=" + state
-				+ ", pincode=" + pincode + ", contactno=" + contactno
-				+ ", patientAddressID=" + patientAddressID + ", address="
-				+ address + "]";
-	}
+    public String toString() {
+        return "PatientAddress [district=" + district + ", state=" + state
+                + ", pincode=" + pincode + ", contactno=" + contactno
+                + ", patientAddressID=" + patientAddressID + ", address="
+                + address + ", currentAddress=" + currentAddress + "]";
+    }
 }

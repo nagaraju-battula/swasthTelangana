@@ -13,7 +13,8 @@ $(document).ready(function() {
 			<div class="todo-content">
 				<h4 class="todo-name">
 					<a href="#"
-						onclick="submitForm('/account/enterPatientDetails.action', 'NO-DATA', 'containerdiv');"><strong><br>Account details</strong> </a>
+						onclick="submitForm('/account/enterPatientDetails.action', 'NO-DATA', 'containerdiv');"><strong><br>Account
+							details</strong> </a>
 				</h4>
 			</div>
 		</li>
@@ -22,7 +23,8 @@ $(document).ready(function() {
 			<div class="todo-content">
 				<h4 class="todo-name">
 					<a href="#"
-						onclick="submitForm('/account/patientNameReportDetails.action', 'NO-DATA', 'containerdiv');"><strong><br>Account history</strong></a>
+						onclick="submitForm('/account/patientNameReportDetails.action', 'NO-DATA', 'containerdiv');"><strong><br>Account
+							history</strong></a>
 				</h4>
 			</div>
 		</li>

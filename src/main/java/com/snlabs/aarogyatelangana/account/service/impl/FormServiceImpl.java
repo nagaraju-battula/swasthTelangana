@@ -7,86 +7,94 @@ import com.snlabs.aarogyatelangana.account.service.PatientService;
 
 public class FormServiceImpl implements FormService {
 
-	FormDao formDao;
+    FormDao formDao;
 
-	PatientService patientService;
+    PatientService patientService;
 
-	@Override
-	public int createForm(Form form) {
-		try {
-			if (formDao.save(form) > 0) {
-				return 1;
-			} else {
-				return 0;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
+    @Override
+    public Patient getPatientDetails(int patientID) {
+        try {
+            return formDao.getPatientDetails(patientID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-	public FormDao getFormDao() {
-		return formDao;
-	}
+    @Override
+    public ClinicAddress saveClinicDetails(ClinicAddress clinicAddress) {
+        try {
+            return formDao.saveClinicDetails(clinicAddress);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-	public void setFormDao(FormDao formDao) {
-		this.formDao = formDao;
-	}
+    @Override
+    public ClinicAddress getClinicDetails(int patientID) {
+        return formDao.getClinicDetails(patientID);
+    }
 
-	@Override
-	public Form searchForm(int formId) {
-		return formDao.findByFormId(formId);
-	}
+    public FormDao getFormDao() {
+        return formDao;
+    }
 
-	public PatientService getPatientService() {
-		return patientService;
-	}
+    public void setFormDao(FormDao formDao) {
+        this.formDao = formDao;
+    }
 
-	public void setPatientService(PatientService patientService) {
-		this.patientService = patientService;
-	}
+    @Override
+    public Form searchForm(int formId) {
+        return formDao.findByFormId(formId);
+    }
 
-	@Override
-	public Form searchFormByDateRange(String fromDate, String toDate) {
-		return formDao.searchFormByDateRange(fromDate, toDate);
-	}
+    public PatientService getPatientService() {
+        return patientService;
+    }
 
-	@Override
-	public int saveSectionA(SectionA section) {
-		try {
-			return formDao.saveSectionA(section);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
+    public void setPatientService(PatientService patientService) {
+        this.patientService = patientService;
+    }
 
-	@Override
-	public int saveNonInvasiveDetails(NonInvasive nonInvasive) {
-		if (formDao.saveNonInvasive(nonInvasive) > 0) {
-			return 1;
-		} else {
-			return 0;
-		}
-	}
+    @Override
+    public Form searchFormByDateRange(String fromDate, String toDate) {
+        return formDao.searchFormByDateRange(fromDate, toDate);
+    }
 
-	@Override
-	public int saveInvasiveDetails(Invasive invasive) {
-		if (formDao.saveInvasive(invasive) > 0) {
-			return 1;
-		} else {
-			return 0;
-		}
+    @Override
+    public SectionA saveSectionA(SectionA section) {
+        return formDao.saveSectionA(section);
+    }
 
-	}
+    @Override
+    public NonInvasive saveNonInvasiveDetails(NonInvasive nonInvasive) {
+        return formDao.saveNonInvasive(nonInvasive);
+    }
 
-	@Override
-	public int saveDeclarationDetails(Declaration declaration) {
-		if (formDao.saveDeclaration(declaration) > 0) {
-			return 1;
-		} else {
-			return 0;
-		}
-	}
+    @Override
+    public Invasive saveInvasiveDetails(Invasive invasive) {
+        return formDao.saveInvasive(invasive);
+    }
+
+    @Override
+    public Declaration saveDeclarationDetails(Declaration declaration) {
+        return formDao.saveDeclaration(declaration);
+    }
+
+    @Override
+    public SectionA getSectionADetails(int patientID) {
+        return formDao.getSectionADetails(patientID);
+    }
+
+    @Override
+    public NonInvasive getNonInvasiveDetails(int patientID) {
+        return formDao.getNonInvasiveDetails(patientID);
+    }
+
+    @Override
+    public Invasive getInvasiveDetails(int patientID) {
+        return formDao.getInvasiveDetails(patientID);
+    }
 
 }

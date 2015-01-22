@@ -8,6 +8,6 @@ public interface DownloadDao {
    
 	public File downloadExcelForm(HttpServletRequest request,HttpSession session);
 	public File downloadExcelPatient(HttpServletRequest request,HttpSession session);
-	public File downloadDetails(HttpServletRequest request,HttpSession session);
+	public File downloadDetails(int patientID, HttpServletRequest request,HttpSession session);
 	
 }

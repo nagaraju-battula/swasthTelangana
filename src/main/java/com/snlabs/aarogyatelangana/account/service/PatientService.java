@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PatientService {
 	//Insert patient details into the DB and returns the patient ID 
-   public int createPatientRecord(Patient patient);
+   public Patient createPatientRecord(Patient patient);
    
    public Patient searchPatientById(int patientId);
    

@@ -7,26 +7,27 @@
 					commandName="updateaccount" enctype="multipart/form-data"
 					method="POST" class="form-horizontal">
 					<div class="form-group">
-						<label class="control-label col-md-3 col-lg-3" for="login-name">Login id</label>
+						<label class="control-label col-md-3 col-lg-3" for="login-name">Login
+							id</label>
 						<div class="col-md-6">
-						<input type="text" class="form-control login-field" value=""
-							name="loginId" id="loginId" />
+							<input type="text" class="form-control login-field" value=""
+								name="loginId" id="loginId" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3 col-lg-3" for="login-pass"></label>
 						<div class="col-md-6">
-						<input type="password" class="form-control login-field" value=""
-							placeholder="Password" name="password" id="password" />
+							<input type="password" class="form-control login-field" value=""
+								placeholder="Password" name="password" id="password" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3 col-lg-3" for="login-pass"></label>
 						<div class="col-md-6">
-						<input type="password" class="form-control login-field" value=""
-							placeholder="Confirm password" name="conPassword"
-							id="conPassword" />
-						</div>	
+							<input type="password" class="form-control login-field" value=""
+								placeholder="Confirm password" name="conPassword"
+								id="conPassword" />
+						</div>
 					</div>
 
 					<a class="btn btn-primary btn-lg btn-block" href="#"

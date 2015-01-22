@@ -2,14 +2,14 @@
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="panel panel-default">
-	<div class="panel-heading">Patient Profiles </div>
+	<div class="panel-heading">Patient Profiles</div>
 	<div class="panel-body">
 		<fieldset>
 			<form class="form-horizontal" method="POST" id="patientDetails"
 				role="form">
 				<div class="form-group" id="resultDev">
-					<table class="table table-bordered" data-toggle="table" data-cache="false"
-						data-height="299">
+					<table class="table table-bordered" data-toggle="table"
+						data-cache="false" data-height="299">
 						<thead>
 							<tr>
 								<th data-field="id">Patient ID</th>

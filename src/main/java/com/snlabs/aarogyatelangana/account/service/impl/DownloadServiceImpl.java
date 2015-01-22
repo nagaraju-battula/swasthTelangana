@@ -12,8 +12,8 @@ public class DownloadServiceImpl implements DownloadService {
 	DownloadDao downloadDao;
 
 	@Override
-	public File downloadForm(HttpServletRequest request, HttpSession session) {
-		return downloadDao.downloadDetails(request, session);
+	public File downloadForm(int patientID, HttpServletRequest request, HttpSession session) {
+		return downloadDao.downloadDetails(patientID, request, session);
 		/*if (session.getAttribute("patientId") != null
 				|| session.getAttribute("patientName") != null) {
 			return downloadDao.downloadExcelPatient(request, session);

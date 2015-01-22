@@ -7,6 +7,7 @@ import com.snlabs.aarogyatelangana.account.dao.DownloadDao;
 import com.snlabs.aarogyatelangana.account.service.impl.CompleteDetailsRowMapper;
 import com.snlabs.aarogyatelangana.account.service.impl.FormRowMapper;
 import com.snlabs.aarogyatelangana.account.service.impl.PatientRowMapper;
+import com.snlabs.aarogyatelangana.account.utils.CustomDate;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -20,7 +21,10 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
 
 public class DownloadDaoImpl implements DownloadDao {
 
@@ -28,6 +32,7 @@ public class DownloadDaoImpl implements DownloadDao {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+
 
     @Override
     public File downloadExcelForm(HttpServletRequest request,
@@ -126,7 +131,7 @@ public class DownloadDaoImpl implements DownloadDao {
         File downloadFile = new File(fullPath);
         System.out.println("FULL  path: " + fullPath);
         try {
-            List<User> detailsList = (List<User>)jdbcTemplate.queryForObject(
+            List<User> detailsList = (List<User>) jdbcTemplate.queryForObject(
                     queryBuilder.toString(), new PatientRowMapper());
             System.out.println("Size " + detailsList.size());
             HSSFWorkbook workBook = new HSSFWorkbook();
@@ -175,70 +180,45 @@ public class DownloadDaoImpl implements DownloadDao {
     }
 
     @Override
-    public File downloadDetails(HttpServletRequest request, HttpSession session) {
-        //String filePath = "/resources/completeDetailsExcelReport.xls";
-        String filePath = "D:\\home\\telangana\\213245\\sekhar.xls";
-        ServletContext context = request.getServletContext();
-        String appPath = context.getRealPath("");
-        System.out.println(" application path: " + appPath);
-        //String fullPath = appPath + filePath;
-        String fullPath = filePath;
-        File downloadFile = new File(filePath);
-        String detailsQuery = "select patient.F_PATIENT_NAME,"
-                + "PATIENT.F_PATIENT_ID," + "PATIENT.F_AGE,"
-                + "address.F_ADDRESS," + "formf.F_MEDICAL_DISEASE,"
-                + "formf.F_PARENTAL_DIAGNOSIS," + "formf.F_GYNA_DETAILS  "
-                + "from t_patient patient," + "t_form formf,"
-                + "t_patient_address address  "
-                + "where patient.f_patient_id = 4015  "
-                + "and formf.f_patient_id = 4015  "
-                + "and address.f_patient_id = 4015";
+    public File downloadDetails(int patientID, HttpServletRequest request, HttpSession session) {
         try {
-            List<User> detailsList = (List<User>)jdbcTemplate.queryForObject(detailsQuery,
-                    new CompleteDetailsRowMapper());
-            System.out.println("Size " + detailsList.size());
-            HSSFWorkbook workBook = new HSSFWorkbook();
-            HSSFSheet sheet = workBook.createSheet("CompleteDetails");
-            int rownum = 0;
-            Form form = null;
-            Patient pe = null;
-            // setWorkBookStyles(workBook);
-            int colnum = 0;
-            Cell cell = null;
-            prepareHeader(sheet.createRow(rownum), workBook);
-            Row row = sheet.createRow(++rownum);
-            for (User user : detailsList) {
-                if (user instanceof Patient) {
-                    pe = (Patient) user;
-                    cell = row.createCell(colnum);
-                    cell.setCellValue((String) pe.getPatientName());
-                    cell = row.createCell(++colnum);
-                    cell.setCellValue((int) pe.getPatientId());
-                    cell = row.createCell(++colnum);
-                }
-                if (user instanceof Form) {
-                    form = (Form) user;
-                    cell = row.createCell(colnum);
-                    cell.setCellValue((Integer) form.getAge());
-                    cell = row.createCell(++colnum);
-                    cell.setCellValue((String) form.getPatientAddress());
-                    cell = row.createCell(++colnum);
-                    cell.setCellValue((Integer) form.getNoOfChildren());
-                    cell = row.createCell(++colnum);
-                    cell.setCellValue((String) form.getMedicalDisease());
-                    cell = row.createCell(++colnum);
-                    cell.setCellValue((String) form.getParentalDiagnosis());
-                    cell = row.createCell(++colnum);
-                    cell.setCellValue((String) form.getGynecologistDetails());
+            CustomDate date = new CustomDate(new SimpleDateFormat("yyyy-MMMM-dd").format(new Date()));
+            StringBuilder patientFilePath = new StringBuilder();
+            patientFilePath.append("D:\\home\\telangana\\")
+                    .append(date.YEAR).append("\\").append(date.MONTH)
+                    .append("\\").append(patientID).append(".xls");
+
+            File patientFile = new File(patientFilePath.toString());
+            Boolean fileCreation = patientFile.getParentFile().exists() ? true : patientFile.getParentFile().mkdirs();
+            if (fileCreation) {
+                if (patientFile.createNewFile()) {
+                    System.out.println("Created File successfully");
+                } else {
+                    System.out.println("Failed in creation");
                 }
             }
-            FileOutputStream fos = new FileOutputStream(new File(fullPath));
+            StringBuilder patientDetailsQuery = new StringBuilder();
+            patientDetailsQuery.append("SELECT patient.F_PATIENT_ID, patient.F_PATIENT_NAME,")
+                    .append("patient.F_AGE, patient.F_GENDER, patient.F_AADHAR_NO,")
+                    .append("patient.F_CURRENT_ADDRESS, patient.F_ADDRESS,")
+                    .append("clinic.F_CLINIC_OWNER_NAME,clinic.F_TYPE,clinic.F_ADDRESS,")
+                    .append("referral.F_REFERRAL_NAME FROM T_PATIENT patient,T_REFERRAL_ADDRESS referral,")
+                    .append("T_CLINIC_DETAILS clinic WHERE patient.F_PATIENT_ID=? AND referral.F_PATIENT_ID")
+                    .append("=? AND clinic.F_PATIENT_ID=?");
+            Object[] arguments = new Object[]{patientID, patientID, patientID};
+            HSSFWorkbook workBook = new HSSFWorkbook();
+            HSSFSheet sheet = workBook.createSheet("Details");
+            int rowNum = 0;
+            Row row = sheet.createRow(++rowNum);
+            jdbcTemplate.query(patientDetailsQuery.toString(), arguments, new CompleteDetailsRowMapper(row));
+            FileOutputStream fos = new FileOutputStream(patientFile);
             workBook.write(fos);
             fos.close();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            return null;
         }
-        return downloadFile;
     }
 
     private void setWorkBookStyles(HSSFWorkbook wb) {

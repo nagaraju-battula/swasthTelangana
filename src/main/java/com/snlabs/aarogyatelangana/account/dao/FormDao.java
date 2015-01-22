@@ -3,7 +3,7 @@ package com.snlabs.aarogyatelangana.account.dao;
 import com.snlabs.aarogyatelangana.account.beans.*;
 
 public interface FormDao {
-	public int save(Form form);
+	public ClinicAddress saveClinicDetails(ClinicAddress clinicAddress);
 
 	public boolean update(Form form);
 
@@ -15,11 +15,21 @@ public interface FormDao {
 
 	public Form searchFormByDateRange(String fromDate, String toDate);
 
-	public int saveSectionA(SectionA sectionA);
+	public SectionA saveSectionA(SectionA sectionA);
 
-	public int saveNonInvasive(NonInvasive nonInvasive);
+	public NonInvasive saveNonInvasive(NonInvasive nonInvasive);
 
-	public int saveInvasive(Invasive invasive);
+	public Invasive saveInvasive(Invasive invasive);
 	
-	public int saveDeclaration(Declaration declaration);
+	public Declaration saveDeclaration(Declaration declaration);
+
+    public Patient getPatientDetails(int patientID);
+
+    public SectionA getSectionADetails(int patientID);
+
+    public ClinicAddress getClinicDetails(int patientID);
+
+    public NonInvasive getNonInvasiveDetails(int patientID);
+
+    public Invasive getInvasiveDetails(int patientID);
 }

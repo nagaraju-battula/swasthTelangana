@@ -1,3 +1,1 @@
-<div class="login-form">&nbsp;&nbsp;
-	Form F report..
-</div>
+<div class="login-form">&nbsp;&nbsp; Form F report..</div>

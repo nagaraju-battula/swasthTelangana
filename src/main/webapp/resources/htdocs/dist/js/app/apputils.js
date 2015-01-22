@@ -1,5 +1,9 @@
+
+
 function processRequest(url, data, targetId) {
-	var promodomain = getDomainName('promoadmin');
+   // var promodomain ='http://swasthtelangana.com:8080';
+    var promodomain =  'http://localhost:8080';
+	//var promodomain = getDomainName('promoadmin');
 	jQuery.ajax({
 		type : "POST",
 		url : promodomain + url,
@@ -110,7 +114,7 @@ $.fn.serializeObject = function() {
 
 function getDomainName(requiredDomain) {
 	// return 'http://swasthtelangana.com:8080';
-	return 'http://localhost:8080';
+	return 'http://localhost:8000';
 
 }
 
@@ -119,9 +123,17 @@ function getDomainName(requiredDomain) {
  * 
  */
 $(document).ready(function(){
-	console.log('Hello');
 	$("#resultDev").hide();
 });
+
+$(document).ready(function(){
+    $("p").click(function(){
+        alert("The paragraph was clicked.");
+    });
+});
+
+
+
 
 
 /*

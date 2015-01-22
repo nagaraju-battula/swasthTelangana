@@ -10,7 +10,7 @@ public class ChantingMantra {
 	 */
 	public static void main(String[] args) {
 		HSSFWorkbook workBook = new HSSFWorkbook();
-		HSSFSheet sheet = workBook.createSheet("CompleteDetails");
+		HSSFSheet sheet22 = workBook.createSheet("CompleteDetails");
 
 	}
 

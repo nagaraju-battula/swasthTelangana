@@ -8,43 +8,39 @@
 <meta charset="utf-8">
 <title>Swasth telangana work desk</title>
 <meta name="description" content="Swasth telangana work desk" />
-
 <meta name="viewport"
 	content="width=1000, initial-scale=1.0, maximum-scale=1.0">
-
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/resources/dist/js/vendor/jquery-2.1.3.js"></script>
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/resources/dist/js/app/apputils.js"></script>
-
-<!-- Loading Bootstrap -->
-<link
-	href="<%=request.getContextPath()%>/resources/dist/css/vendor/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- Loading Flat UI -->
-<link
-	href="<%=request.getContextPath()%>/resources/dist/css/flat-ui.css"
-	rel="stylesheet">
-<link
-	href="<%=request.getContextPath()%>/resources/docs/assets/css/demo.css"
-	rel="stylesheet">
-
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/resources/dist/js/bootstrap/bootstrap.min.js"></script>
-
-<link rel="shortcut icon" href="img/favicon.ico">
-
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../../favicon.ico">
+    <script type="text/javascript"
+            src="<%=request.getContextPath()%>/resources/dist/js/vendor/jquery-2.1.3.js"></script>
+    <script type="text/javascript"
+            src="<%=request.getContextPath()%>/resources/dist/js/app/apputils.js"></script>
 
+    <!-- Loading Bootstrap -->
+    <link
+            href="<%=request.getContextPath()%>/resources/dist/css/vendor/bootstrap.min.css"
+            rel="stylesheet">
+    <!-- Loading Flat UI -->
+    <link
+            href="<%=request.getContextPath()%>/resources/dist/css/flat-ui.css"
+            rel="stylesheet">
+    <link
+            href="<%=request.getContextPath()%>/resources/docs/assets/css/demo.css"
+            rel="stylesheet">
+
+    <script type="text/javascript"
+            src="<%=request.getContextPath()%>/resources/dist/js/bootstrap/bootstrap.min.js"></script>
+
+    <link rel="shortcut icon" href="img/favicon.ico">
 </head>
 <body bgcolor="#edeff1">
 	<div class="container">
 		<br>
+
 		<div class="row demo-row">
 			<div class="col-xs-12">
 				<nav class="navbar navbar-inverse navbar-embossed" role="navigation">
@@ -120,13 +116,14 @@
 					<div class="login-form">
 						&nbsp;&nbsp; Hi ${userDetails.displayName}
 						(${userDetails.userRole}), Welcome to Swasth telangana.<br /> <br />
-						<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-						<br /> <br /> <br />
+						<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+						<br /> <br />
 					</div>
 					<br />
 				</div>
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

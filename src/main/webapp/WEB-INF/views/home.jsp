@@ -46,8 +46,7 @@
 	<div id="errorMessage"></div>
 	<div id="canvas">
 		<div class="container">
-			<br>
-			<br>
+			<br> <br>
 			<div class="login">
 				<div class="login-screen">
 					<c:if test="${failedLogin != null}">

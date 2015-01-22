@@ -10,15 +10,44 @@ public class Patient extends User implements Serializable {
 	private int formId;
 	private int patientId;
 	private Date createdTimestamp;
-	private int age;
+	private int age = 12;
 	private int txnID;
 	private String gender;
 	private int patientAddressID;
 	private PatientAddress patientAddress;
 	private String createdBy;
 	private String formFDownloadPath;
+    private String aadharNo = "Hello Aadhar";
 
-	public int getPatientId() {
+    public String getFatherName() {
+        return fatherName;
+    }
+
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
+    }
+
+    private String fatherName;
+
+    public int getNumner() {
+        return numner;
+    }
+
+    public void setNumner(int numner) {
+        this.numner = numner;
+    }
+
+    private int numner;
+
+    public String getAadharNo() {
+        return aadharNo;
+    }
+
+    public void setAadharNo(String aadharNo) {
+        this.aadharNo = aadharNo;
+    }
+
+    public int getPatientId() {
 		return patientId;
 	}
 
@@ -106,12 +135,22 @@ public class Patient extends User implements Serializable {
 		this.formFDownloadPath = formFDownloadPath;
 	}
 
-	@Override
-	public String toString() {
-		return "Patient [patientName=" + patientName + ", formId=" + formId
-				+ ", patientId=" + patientId + ", createdTimestamp="
-				+ createdTimestamp + ", age=" + age + ", txnID=" + txnID
-				+ ", gender=" + gender + ", patientAddressID="
-				+ patientAddressID + "]";
-	}
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Patient{");
+        sb.append("patientName='").append(patientName).append('\'');
+        sb.append(", formId=").append(formId);
+        sb.append(", patientId=").append(patientId);
+        sb.append(", createdTimestamp=").append(createdTimestamp);
+        sb.append(", age=").append(age);
+        sb.append(", txnID=").append(txnID);
+        sb.append(", gender='").append(gender).append('\'');
+        sb.append(", patientAddressID=").append(patientAddressID);
+        sb.append(", patientAddress=").append(patientAddress);
+        sb.append(", createdBy='").append(createdBy).append('\'');
+        sb.append(", formFDownloadPath='").append(formFDownloadPath).append('\'');
+        sb.append(", aadharNo='").append(aadharNo).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

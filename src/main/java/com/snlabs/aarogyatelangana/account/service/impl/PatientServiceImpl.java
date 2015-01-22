@@ -10,51 +10,51 @@ import java.util.Random;
 
 public class PatientServiceImpl implements PatientService {
 
-	PatientDao patientDao;
+    PatientDao patientDao;
 
-	public static HashMap<String, String> patientSessionMap = new HashMap<String, String>();
+    public static HashMap<String, String> patientSessionMap = new HashMap<String, String>();
 
-	@Override
-	public int createPatientRecord(Patient patient) {
-		try {
-			patient.setPatientId(new Random().nextInt(9999 - 1000) + 1000);
-			return patientDao.save(patient);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
+    @Override
+    public Patient createPatientRecord(Patient patient) {
+        try {
+            patient.setPatientId(new Random().nextInt(9999 - 1000) + 1000);
+            return patientDao.save(patient);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-	public PatientDao getPatientDao() {
-		return patientDao;
-	}
+    public PatientDao getPatientDao() {
+        return patientDao;
+    }
 
-	public void setPatientDao(PatientDao patientDao) {
-		this.patientDao = patientDao;
-	}
+    public void setPatientDao(PatientDao patientDao) {
+        this.patientDao = patientDao;
+    }
 
-	@Override
-	public Patient searchPatientById(int patientId) {
-		return patientDao.searchPatientById(patientId);
-	}
+    @Override
+    public Patient searchPatientById(int patientId) {
+        return patientDao.searchPatientById(patientId);
+    }
 
-	@Override
-	public Patient searchPatientByName(String patientName) {
-		return patientDao.searchPatientByName(patientName);
-	}
+    @Override
+    public Patient searchPatientByName(String patientName) {
+        return patientDao.searchPatientByName(patientName);
+    }
 
-	public static HashMap<String, String> getPatientSessionMap() {
-		return patientSessionMap;
-	}
+    public static HashMap<String, String> getPatientSessionMap() {
+        return patientSessionMap;
+    }
 
-	public static void setPatientSessionMap(
-			HashMap<String, String> patientSessionMap) {
-		PatientServiceImpl.patientSessionMap = patientSessionMap;
-	}
+    public static void setPatientSessionMap(
+            HashMap<String, String> patientSessionMap) {
+        PatientServiceImpl.patientSessionMap = patientSessionMap;
+    }
 
-	@Override
-	public List<Patient> getPatientProfiles(String createdBy) {
-		return patientDao.searchPatientProfilesByCreator(createdBy);
-	}
+    @Override
+    public List<Patient> getPatientProfiles(String createdBy) {
+        return patientDao.searchPatientProfilesByCreator(createdBy);
+    }
 
 }

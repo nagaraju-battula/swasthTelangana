@@ -29,7 +29,17 @@ public class Form extends User {
 	public String searchFormId;
 	private String patientName;
     private int noOfChildren;
-	static {
+    private int patientID;
+
+    public int getPatientID() {
+        return patientID;
+    }
+
+    public void setPatientID(int patientID) {
+        this.patientID = patientID;
+    }
+
+    static {
 		procedures.add("Ultrasound");
 		procedures.add("Any other (specify)");
 	}

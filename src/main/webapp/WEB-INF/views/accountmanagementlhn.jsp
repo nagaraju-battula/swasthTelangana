@@ -13,7 +13,8 @@ $(document).ready(function() {
 			<div class="todo-content">
 				<h4 class="todo-name">
 					<a href="#"
-						onclick="submitForm('/account/createaccount.action', 'NO-DATA', 'containerdiv');"><strong><br>Create account</strong> </a>
+						onclick="submitForm('/account/createaccount.action', 'NO-DATA', 'containerdiv');"><strong><br>Create
+							account</strong> </a>
 				</h4>
 			</div>
 		</li>
@@ -22,7 +23,8 @@ $(document).ready(function() {
 			<div class="todo-content">
 				<h4 class="todo-name">
 					<a href="#"
-						onclick="submitForm('/account/updateaccount.action', 'NO-DATA', 'containerdiv');"><strong><br>Update account</strong></a>
+						onclick="submitForm('/account/updateaccount.action', 'NO-DATA', 'containerdiv');"><strong><br>Update
+							account</strong></a>
 				</h4>
 			</div>
 		</li>
@@ -31,7 +33,8 @@ $(document).ready(function() {
 			<div class="todo-content">
 				<h4 class="todo-name">
 					<a href="#"
-						onclick="submitForm('/account/formDateReportDetails.action', 'NO-DATA', 'containerdiv');"><strong><br>Search accounts</strong></a>
+						onclick="submitForm('/account/formDateReportDetails.action', 'NO-DATA', 'containerdiv');"><strong><br>Search
+							accounts</strong></a>
 				</h4>
 			</div>
 		</li>

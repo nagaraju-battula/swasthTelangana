@@ -19,8 +19,9 @@
 					<div class="col-md-4 col-lg-4"></div>
 
 					<div class="col-md-7 col-lg-7">
-					<br>
-					<a class="btn btn-primary" href="<%=request.getContextPath()%>/downLoadForm.action">Search & Download Details as Excel</a>
+						<br> <a class="btn btn-primary"
+							href="<%=request.getContextPath()%>/downLoadForm.action">Search
+							& Download Details as Excel</a>
 						<!-- <br> <a class="btn btn-primary form-control" href="#"
 							onclick="submitForm('/account/downLoadForm.action', 'searchFormByDate', 'searchResultdiv');">
 							Search </a> -->

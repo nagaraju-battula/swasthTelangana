@@ -17,187 +17,237 @@ import java.util.ArrayList;
 @Controller
 public class FormController {
 
-	@Autowired
-	public FormService formService;
-	
-	@Autowired
-	DownloadService downloadService;
+    @Autowired
+    public FormService formService;
 
-	@RequestMapping(value = { "enterFormDetails.action" }, method = RequestMethod.POST)
-	public String enterFormDetails(HttpSession session) {
-		session.setAttribute("saveResult", null);
-		ArrayList<Integer> patientIDs = new ArrayList<Integer>();
-		session.setAttribute("patientIDs", patientIDs);
-		return "form";
-	}
+    @Autowired
+    DownloadService downloadService;
 
-	/*
-	 * save Form Details
-	 */
+    @RequestMapping(value = {"enterFormDetails.action"}, method = RequestMethod.POST)
+    public String enterFormDetails(HttpSession session) {
+        session.setAttribute("saveResult", null);
+        ArrayList<Integer> patientIDs = new ArrayList<Integer>();
+        session.setAttribute("patientIDs", patientIDs);
+        return "form";
+    }
 
-	@RequestMapping(value = { "saveClinicDetails.action" }, method = RequestMethod.POST)
-	public String saveClinicDetails(@RequestBody Form form,
-			HttpSession session, ModelMap model) {
-		int result = formService.createForm(form);
-		try {
-			if (result > 0) {
-				model.put("patientID", form.getPatient().getPatientId());
-				model.put("patientName", form.getPatient().getPatientName());
-			} else {
-				model.put(
-						"saveResult",
-						"Oh snap! Failed Please check the whether you created Patient Form for this Patient Name.");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "sectionA";
-	}
+    @RequestMapping(value = {"previousClinicDetails.action"}, method = RequestMethod.POST)
+    public String previousClinicDetails(@RequestBody ClinicAddress clinicAddress,
+                                        HttpSession session, ModelMap model) {
+        if (formService.saveClinicDetails(clinicAddress) != null) {
+            model.put("patient", formService.getPatientDetails(clinicAddress.getPatientID()));
+            return "patientForm";
+        } else {
+            return "clinicDetails";
+        }
+    }
 
-	/*
-	 * Save SectionA details
-	 */
+    @RequestMapping(value = {"saveClinicDetails.action"}, method = RequestMethod.POST)
+    public String saveClinicDetails(@RequestBody ClinicAddress clinicAddress,
+                                    HttpSession session, ModelMap model) {
+        model.put("clinicAddress", formService.saveClinicDetails(clinicAddress));
+        return "clinicDetails";
+    }
 
-	@RequestMapping(value = { "saveSectionA.action" }, method = RequestMethod.POST)
-	public String saveSectionADetails(@RequestBody SectionA sectionA,
-			HttpSession session, ModelMap model) {
-		int result = formService.saveSectionA(sectionA);
-		try {
-			if (result > 0) {
-				model.put("patientID", sectionA.getPatientID());
-				model.put("patientName", sectionA.getPatientName());
-				model.put("diagnoseDetails", NonInvasive.getDiagnoseDetails());
-				model.put("procedures", NonInvasive.getProcedures());
+    @RequestMapping(value = {"nextClinicDetails.action"}, method = RequestMethod.POST)
+    public String nextClinicDetails(@RequestBody ClinicAddress clinicAddress,
+                                    HttpSession session, ModelMap model) {
+        try {
+            if (formService.saveClinicDetails(clinicAddress) != null) {
+                SectionA sectionA = new SectionA();
+                sectionA.setPatientID(clinicAddress.getPatientID());
+                sectionA.setPatientName(clinicAddress.getPatientName());
+                model.put("sectionA", sectionA);
+                return "sectionA";
+            } else {
+                return "clinicDetails";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-			} else {
-				model.put(
-						"saveResult",
-						"Oh snap! Failed Please check the whether you created Patient Form for this Patient Name.");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "nonInvasive";
-	}
 
-	/*
-	 * Save non Invasive Details
-	 */
-	@RequestMapping(value = { "saveNonInvasiveDetails.action" }, method = RequestMethod.POST)
-	public String saveNonInvasiveDetails(@RequestBody NonInvasive nonInvasive,
-			HttpSession session, ModelMap model) {
-		int formId = formService.saveNonInvasiveDetails(nonInvasive);
-		try {
-			if (formId > 0) {
-				model.put("patientID", nonInvasive.getPatientID());
-				model.put("patientName", nonInvasive.getPatientName());
-				model.put("diagnosisBasis", Invasive.getDiagnosisBasis());
-				model.put("diagnosisIndication",
-						Invasive.getDiagnosisIndication());
-				model.put("invasiveProcedures",
-						Invasive.getInvasiveProcedures());
-			} else {
-				model.put(
-						"saveResult",
-						"Oh snap! Failed Please check the whether you created Patient Form for this Patient Name.");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "invasive";
-	}
+    @RequestMapping(value = {"previousSectionA.action"}, method = RequestMethod.POST)
+    public String previousSectionA(@RequestBody SectionA sectionA,
+                                   HttpSession session, ModelMap model) {
+        if (formService.saveSectionA(sectionA) != null) {
+            model.put("clinicAddress", formService.getClinicDetails(sectionA.getPatientID()));
+            return "clinicDetails";
+        } else {
+            return "sectionA";
+        }
+    }
 
-	/*
-	 * Save Invasive Details
-	 */
-	@RequestMapping(value = { "saveInvasiveDetails.action" }, method = RequestMethod.POST)
-	public String saveInvasiveDetails(@RequestBody Invasive invasive,
-			HttpSession session, ModelMap model) {
-		int formId = formService.saveInvasiveDetails(invasive);
-		try {
-			if (formId > 0) {
-				model.put("patientID", invasive.getPatientID());
-				model.put("patientName", invasive.getPatientName());
-				model.put("doctorName", invasive.getDoctorName());
-			} else {
-				model.put(
-						"saveResult",
-						"Oh snap! Failed Please check the whether you created Patient Form for this Patient Name.");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "declaration";
-	}
+    @RequestMapping(value = {"saveSectionA.action"}, method = RequestMethod.POST)
+    public String saveSectionADetails(@RequestBody SectionA sectionA,
+                                      HttpSession session, ModelMap model) {
+        model.put("sectionA", formService.saveSectionA(sectionA));
+        return "sectionA";
+    }
 
-	@RequestMapping(value = { "searchReportByFormId.action" }, method = RequestMethod.POST)
-	public String searchReportByFormId(@RequestBody Form form,
-			HttpSession session, ModelMap map) {
-		int formId = Integer.parseInt(form.getSearchFormId());
-		session.setAttribute("formId", formId);
-		session.setAttribute("patientId", null);
-		session.setAttribute("patientName", null);
-		Form resultForm = formService.searchForm(formId);
-		session.setAttribute("form", resultForm);
-		if (resultForm != null) {
-			return "viewFormResultform";
-		} else {
-			return "errorResultForm";
-		}
-	}
+    @RequestMapping(value = {"nextSectionA.action"}, method = RequestMethod.POST)
+    public String nextSectionADetails(@RequestBody SectionA sectionA,
+                                      HttpSession session, ModelMap model) {
+        if (formService.saveSectionA(sectionA) != null) {
+            NonInvasive nonInvasive = new NonInvasive();
+            nonInvasive.setPatientID(sectionA.getPatientID());
+            nonInvasive.setPatientName(sectionA.getPatientName());
+            model.put("nonInvasive", nonInvasive);
+            model.put("diagnoseDetails", NonInvasive.getDiagnoseDetails());
+            model.put("procedures", NonInvasive.getProcedures());
+            return "nonInvasive";
+        } else {
+            return "sectionA";
+        }
+    }
 
-	@RequestMapping(value = { "searchReportByDateRange.action" }, method = RequestMethod.POST)
-	public String searchReportByDateRange(@RequestBody Form form,
-			HttpSession session, ModelMap map) {
-		Form resultForm = formService.searchFormByDateRange(form.fromDate,
-				form.toDate);
-		if (resultForm != null) {
-			return "viewFormDateRangeResultform";
-		} else {
-			map.put("Failed", "No Records Found Between These Dates");
-			return "formDateReport";
-		}
-	}
+    @RequestMapping(value = {"previousNonInvasiveDetails.action"}, method = RequestMethod.POST)
+    public String previousNonInvasiveDetails(@RequestBody NonInvasive nonInvasive,
+                                             HttpSession session, ModelMap model) {
+        if (formService.saveNonInvasiveDetails(nonInvasive) != null) {
+            model.put("sectionA", formService.getSectionADetails(nonInvasive.getPatientID()));
+            return "sectionA";
+        } else {
+            return "nonInvasive";
+        }
+    }
 
-	@RequestMapping(value = { "viewFormDetails.action" }, method = RequestMethod.POST)
-	public String viewFormDetails(@RequestBody Form form, HttpSession session,
-			ModelMap model) {
-		Form resultForm = formService.searchForm(Integer.parseInt(form
-				.getSearchFormId()));
-		session.setAttribute("form", resultForm);
-		if (resultForm != null) {
-			return "viewResultform";
-		} else {
-			return "errorResultForm";
-		}
-	}
 
-	@RequestMapping(value = { "saveDeclarationDetails.action" }, method = RequestMethod.POST)
-	public String saveDeclaration(@RequestBody Declaration declaration,
-			HttpSession session, ModelMap model,HttpServletRequest request) {		
-		if (formService.saveDeclarationDetails(declaration) > 0) {
-			model.put("message", "Saved Successfully");
-			downloadService.downloadForm(request, session);
-			return "declaration";
-		} else {
-			model.put("message", "Failed");
-			return "failed";
-		}
-	}
+    @RequestMapping(value = {"saveNonInvasiveDetails.action"}, method = RequestMethod.POST)
+    public String saveNonInvasiveDetails(@RequestBody NonInvasive nonInvasive,
+                                         HttpSession session, ModelMap model) {
+        model.put("nonInvasive", formService.saveNonInvasiveDetails(nonInvasive));
+        return "nonInvasive";
+    }
 
-	public FormService getFormService() {
-		return formService;
-	}
+    @RequestMapping(value = {"nextNonInvasiveDetails.action"}, method = RequestMethod.POST)
+    public String nextNonInvasiveDetails(@RequestBody NonInvasive nonInvasive,
+                                         HttpSession session, ModelMap model) {
 
-	public void setFormService(FormService formService) {
-		this.formService = formService;
-	}
-	
-	public DownloadService getDownloadService() {
-		return downloadService;
-	}
+        if (formService.saveNonInvasiveDetails(nonInvasive) != null) {
+            Invasive invasive = new Invasive();
+            invasive.setPatientName(nonInvasive.getPatientName());
+            invasive.setPatientID(nonInvasive.getPatientID());
+            model.put("diagnosisBasis", Invasive.getDiagnosisBasis());
+            model.put("diagnosisIndication",
+                    Invasive.getDiagnosisIndication());
+            model.put("invasiveProcedures",
+                    Invasive.getInvasiveProcedures());
+            model.put("invasive", invasive);
+            return "invasive";
+        } else {
+            return "nonInvasive";
+        }
+    }
 
-	public void setDownloadService(DownloadService downloadService) {
-		this.downloadService = downloadService;
-	}
+    @RequestMapping(value = {"previousInvasiveDetails.action"}, method = RequestMethod.POST)
+    public String previousInvasiveDetails(@RequestBody Invasive invasive,
+                                          HttpSession session, ModelMap model) {
+        if (formService.saveInvasiveDetails(invasive) != null) {
+            model.put("nonInvasive", formService.getNonInvasiveDetails(invasive.getPatientID()));
+            return "nonInvasive";
+        } else {
+            return "invasive";
+        }
+    }
+
+    @RequestMapping(value = {"saveInvasiveDetails.action"}, method = RequestMethod.POST)
+    public String saveInvasiveDetails(@RequestBody Invasive invasive,
+                                      HttpSession session, ModelMap model) {
+        model.put("invasive", formService.saveInvasiveDetails(invasive));
+        return "invasive";
+    }
+
+
+    @RequestMapping(value = {"nextInvasiveDetails.action"}, method = RequestMethod.POST)
+    public String nextInvasiveDetails(@RequestBody Invasive invasive,
+                                      HttpSession session, ModelMap model) {
+        try {
+            if (formService.saveInvasiveDetails(invasive) != null) {
+                model.put("patientID", invasive.getPatientID());
+                model.put("patientName", invasive.getPatientName());
+                model.put("doctorName", invasive.getDoctorName());
+            } else {
+                model.put(
+                        "saveResult",
+                        "Oh snap! Failed Please check the whether you created Patient Form for this Patient Name.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "declaration";
+    }
+
+    @RequestMapping(value = {"searchReportByFormId.action"}, method = RequestMethod.POST)
+    public String searchReportByFormId(@RequestBody Form form,
+                                       HttpSession session, ModelMap map) {
+        int formId = Integer.parseInt(form.getSearchFormId());
+        session.setAttribute("formId", formId);
+        session.setAttribute("patientId", null);
+        session.setAttribute("patientName", null);
+        Form resultForm = formService.searchForm(formId);
+        session.setAttribute("form", resultForm);
+        if (resultForm != null) {
+            return "viewFormResultform";
+        } else {
+            return "errorResultForm";
+        }
+    }
+
+    @RequestMapping(value = {"searchReportByDateRange.action"}, method = RequestMethod.POST)
+    public String searchReportByDateRange(@RequestBody Form form,
+                                          HttpSession session, ModelMap map) {
+        Form resultForm = formService.searchFormByDateRange(form.fromDate,
+                form.toDate);
+        if (resultForm != null) {
+            return "viewFormDateRangeResultform";
+        } else {
+            map.put("Failed", "No Records Found Between These Dates");
+            return "formDateReport";
+        }
+    }
+
+    @RequestMapping(value = {"viewFormDetails.action"}, method = RequestMethod.POST)
+    public String viewFormDetails(@RequestBody Form form, HttpSession session,
+                                  ModelMap model) {
+        Form resultForm = formService.searchForm(Integer.parseInt(form
+                .getSearchFormId()));
+        session.setAttribute("form", resultForm);
+        if (resultForm != null) {
+            return "viewResultform";
+        } else {
+            return "errorResultForm";
+        }
+    }
+
+    @RequestMapping(value = {"saveDeclarationDetails.action"}, method = RequestMethod.POST)
+    public String saveDeclaration(@RequestBody Declaration declaration,
+                                  HttpSession session, ModelMap model, HttpServletRequest request) {
+        if (formService.saveDeclarationDetails(declaration) != null) {
+            model.put("message", "Saved Successfully");
+            downloadService.downloadForm(declaration.getPatientID(), request, session);
+            return "declaration";
+        } else {
+            model.put("message", "Failed");
+            return "failed";
+        }
+    }
+
+    public FormService getFormService() {
+        return formService;
+    }
+
+    public void setFormService(FormService formService) {
+        this.formService = formService;
+    }
+
+    public DownloadService getDownloadService() {
+        return downloadService;
+    }
+
+    public void setDownloadService(DownloadService downloadService) {
+        this.downloadService = downloadService;
+    }
 }
