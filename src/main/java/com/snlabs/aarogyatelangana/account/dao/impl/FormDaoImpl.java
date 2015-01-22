@@ -80,7 +80,7 @@ public class FormDaoImpl implements FormDao {
         sb.append("UPDATE T_PATIENT SET ").append("F_FORM_ID = ?");
         sb.append(" WHERE F_PATIENT_ID=?");
         Object[] args = new Object[]{form.getFormID(),
-                form.getPatient().getPatientId()};
+                form.getPatient().getPatientID()};
         try {
             if (jdbcTemplate.update(sb.toString(), args) > 0) {
                 return 1;

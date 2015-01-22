@@ -27,11 +27,11 @@ public class PatientDaoImpl implements PatientDao {
                 + "F_PATIENT_NAME," + "F_PATIENT_ID," + "F_AGE," + "F_GENDER,"
                 + "F_CREATED_BY," + "F_CREATED_TIMESTAMP," + "F_AADHAR_NO" + ") "
                 + "VALUES(?,?,?,?,?,SYSDATE(),?)";
-        Object[] args = {patient.getPatientName(), patient.getPatientId(),
+        Object[] args = {patient.getPatientName(), patient.getPatientID(),
                 patient.getAge(), patient.getGender(), patient.getCreatedBy(), patient.getAadharNo()};
         try {
             if (jdbcTemplate.update(insertPatientQuery, args) > 0) {
-                return savePatientAddress(patient.getPatientId(), patient.getPatientAddress()) > 0 ? patient : null;
+                return savePatientAddress(patient.getPatientID(), patient.getPatientAddress()) > 0 ? patient : null;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,9 +51,20 @@ public class PatientDaoImpl implements PatientDao {
     }
 
     @Override
-    public boolean update(Patient patient) {
-        // TODO Auto-generated method stub
-        return false;
+    public int update(Patient patient) {
+        StringBuilder updatePatientRecord = new StringBuilder();
+        updatePatientRecord.append("UPDATE T_PATIENT SET F_PATIENT_NAME = ?,")
+                .append(" F_UPDATED_TIMESTAMP = SYSDATE(),").append(" F_AGE = ?,")
+                .append(" F_GENDER = ?,").append(" F_AADHAR_NO = ?")
+                .append(" WHERE F_PATIENT_ID = ?");
+        Object[] args = {patient.getPatientName(), patient.getAge(), patient.getGender(),
+                patient.getAadharNo(), patient.getPatientID()};
+        try {
+            return jdbcTemplate.update(updatePatientRecord.toString(), args);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override
@@ -71,14 +82,14 @@ public class PatientDaoImpl implements PatientDao {
     @Override
     public Patient findByPatientId(Patient patient) {
         String patientRecord = "SELECT * FROM T_PATIENT WHERE F_PATIENT_ID = ?";
-        Object[] args = {patient.getPatientId()};
+        Object[] args = {patient.getPatientID()};
         try {
             final Patient record = new Patient();
             jdbcTemplate.update(patientRecord, args, new RowMapper() {
                 @Override
                 public Patient mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
                     record.setPatientName(resultSet.getString("F_PATIENT_NAME"));
-                    record.setPatientId(resultSet.getInt("F_PATIENT_ID"));
+                    record.setPatientID(resultSet.getInt("F_PATIENT_ID"));
                     record.setCreatedTimestamp(resultSet.getDate("F_CREATED_TIMESTAMP"));
                     record.setAge(resultSet.getInt("F_AGE"));
                     record.setGender(resultSet.getString("F_GENDER"));

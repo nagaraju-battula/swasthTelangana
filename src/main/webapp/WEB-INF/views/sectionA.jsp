@@ -44,9 +44,8 @@
                         <input class="form-control" name="guardianName" type="text"/>
                     </div>
                 </div>
-                <input type="hidden" id="patientID" name="patientID"
-                       value="${sectionA.patientID}"> <input type="hidden"
-                                                    name="patientName" value="${sectionA.patientName}">
+                <input type="hidden" id="patientID" name="patientID" value="${sectionA.patientID}"/>
+                <input type="hidden" id="patientName" name="patientName" value="${sectionA.patientName}"/>
 
                 <div class="form-actions">
                     <label class="control-label col-md-3 col-lg-3"/>

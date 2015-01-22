@@ -17,8 +17,12 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public Patient createPatientRecord(Patient patient) {
         try {
-            patient.setPatientId(new Random().nextInt(9999 - 1000) + 1000);
-            return patientDao.save(patient);
+            if (patient.getPatientID() > 0 && patientDao.update(patient) > 0) {
+                return patient;
+            } else {
+                patient.setPatientID(new Random().nextInt(9999 - 1000) + 1000);
+                return patientDao.save(patient);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

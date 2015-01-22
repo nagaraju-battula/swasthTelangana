@@ -8,7 +8,7 @@
         <fieldset>
             <form class="form-horizontal" method="POST" id="patientDetails"
                   role="form">
-                <c:if test="${result}">
+                <c:if test="${patient.patientID} > 0">
                     <div class="form-group" id="resultDev">
                         <div class="alert alert-success">
                             <a href="#" class="close" data-dismiss="alert">&times;</a>
@@ -19,12 +19,11 @@
                     </div>
                 </c:if>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-lg-3" for="patientName">Patient
-                        Name:</label>
+                    <label class="control-label col-md-3 col-lg-3">Patient Name:</label>
 
                     <div class="col-md-9 col-lg-9">
-                        <input class="form-control" for="patientName" type="text"
-                               name="patientName" id="patientName" value="${patient.patientName}"/>
+                        <input class="form-control" type="text" name="patientName"
+                               id="patientName" value="${patient.patientName}"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -112,7 +111,8 @@
                                name="patient.patientAddress.pincode" value="${patient.patientAddress.pincode}"> </input>
                     </div>
                 </div>
-                <input type="hidden" id="formID" name="createdBy" value="${loginID}">
+                <input type="hidden" id="formID" name="createdBy" value="${loginID}"/>
+                <input type="hidden" id="patientID" name="patientID" value="${patient.patientID}"/>
 
                 <div class="form-group">
                     <label class="control-label col-md-3 col-lg-3"></label>

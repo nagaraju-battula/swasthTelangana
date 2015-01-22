@@ -8,7 +8,7 @@ public class Patient extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String patientName;
 	private int formId;
-	private int patientId;
+	private int patientID;
 	private Date createdTimestamp;
 	private int age = 12;
 	private int txnID;
@@ -47,12 +47,12 @@ public class Patient extends User implements Serializable {
         this.aadharNo = aadharNo;
     }
 
-    public int getPatientId() {
-		return patientId;
+    public int getPatientID() {
+		return patientID;
 	}
 
-	public void setPatientId(int patientId) {
-		this.patientId = patientId;
+	public void setPatientID(int patientID) {
+		this.patientID = patientID;
 	}
 
 	public String getPatientName() {
@@ -140,7 +140,7 @@ public class Patient extends User implements Serializable {
         final StringBuilder sb = new StringBuilder("Patient{");
         sb.append("patientName='").append(patientName).append('\'');
         sb.append(", formId=").append(formId);
-        sb.append(", patientId=").append(patientId);
+        sb.append(", patientId=").append(patientID);
         sb.append(", createdTimestamp=").append(createdTimestamp);
         sb.append(", age=").append(age);
         sb.append(", txnID=").append(txnID);

@@ -30,11 +30,8 @@ public class PatientController {
     @RequestMapping(value = {"savePatientDetails.action"}, method = RequestMethod.POST)
     public String savePatientDetails(@RequestBody Patient patient,
                                      HttpSession session, ModelMap model) {
-        Patient result = patientService.createPatientRecord(patient);
-        if (result != null) {
-            model.put("patient", result);
-            model.put("result", "Success");
-        }
+        model.put("patient", patientService.createPatientRecord(patient));
+        model.put("result", "Success");
         return "patientForm";
     }
 
@@ -61,7 +58,7 @@ public class PatientController {
         try {
             if (patientService.createPatientRecord(patient) != null) {
                 ClinicAddress clinicAddress = new ClinicAddress();
-                clinicAddress.setPatientID(patient.getPatientId());
+                clinicAddress.setPatientID(patient.getPatientID());
                 clinicAddress.setPatientName(patient.getPatientName());
                 model.put("clinicAddress", clinicAddress);
                 System.out.print("Clinic address " + clinicAddress);
@@ -89,10 +86,10 @@ public class PatientController {
     @RequestMapping(value = {"searchReportByPatientId.action"}, method = RequestMethod.POST)
     public String searchReportByPatientId(@RequestBody Patient patient,
                                           HttpSession session, ModelMap map) {
-        Integer patientId = patient.getPatientId();
+        Integer patientId = patient.getPatientID();
         Patient resultForm = patientService.searchPatientById(patientId);
         session.setAttribute("form", resultForm);
-        session.setAttribute("patientId", patient.getPatientId());
+        session.setAttribute("patientId", patient.getPatientID());
         session.setAttribute("patientName", null);
         if (resultForm != null) {
             return "viewPatientResultform";

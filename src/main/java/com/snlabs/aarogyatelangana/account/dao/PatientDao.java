@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PatientDao {
      public Patient save(Patient patient);
-     public boolean update(Patient patient);
+     public int update(Patient patient);
      public Patient findByPatientName(String patient);
      public boolean delete(Patient patient);
      public Patient findByPatientId(Patient patient);
