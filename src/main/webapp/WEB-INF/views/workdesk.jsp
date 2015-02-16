@@ -97,7 +97,7 @@
 				<div id="containerdiv">
 					<div class="login-form">
 						&nbsp;&nbsp; Hi ${userDetails.displayName}
-						(${userDetails.userRole}), Welcome to Swasth telangana.<br />
+						(${userDetails.userRole}), Welcome to Swasth telangana.
 						<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 						<br /> <br />
 					</div>
