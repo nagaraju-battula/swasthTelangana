@@ -6,71 +6,17 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Swasth telangana work desk</title>
+    <title>Swasth Telangana work desk</title>
     <meta name="description" content="Swasth telangana work desk"/>
-    <meta name="viewport"
-          content="width=1000, initial-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../favicon.ico">
-
 
     <link rel="shortcut icon" href="img/favicon.ico">
 </head>
 <body bgcolor="#edeff1">
 <div class="container">
-    <br>
-
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="sidebar-nav">
-                <div class="navbar navbar-default" role="navigation">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse"
-                                data-target=".sidebar-navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <span class="visible-xs navbar-brand">Sidebar menu</span>
-                    </div>
-                    <div class="navbar-collapse collapse sidebar-navbar-collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Menu Item 1</a></li>
-                            <li><a href="#">Menu Item 2</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b
-                                        class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li class="dropdown-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Menu Item 4</a></li>
-                            <li><a href="#">Reviews <span class="badge">1,118</span></a></li>
-                        </ul>
-                    </div>
-                    <!--/.nav-collapse -->
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-9">
-            Main content goes here
-        </div>
-    </div>
-
     <div class="row demo-row">
         <div class="col-xs-12">
-
-
             <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -133,25 +79,45 @@
             </nav>
         </div>
     </div>
-    <!-- /row -->
-
-    <div class="row demo-samples">
-        <div class="col-xs-4" id="lhndiv">
-            <%@ include file="patiententrylhn.jsp" %>
-        </div>
-
-        <div class="col-xs-8, col-lg-8 col-md-8">
-            <div id="containerdiv">
-                <div class="login-form">
-                    &nbsp;&nbsp; Hi ${userDetails.displayName}
-                    (${userDetails.userRole}), Welcome to Swasth telangana.
-                    <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
-                    <br/> <br/>
+    <div class="col-xs-3, col-lg-3 col-md-3 col-sm-3">
+        <div class="sidebar-nav">
+            <div class="navbar navbar-default" role="navigation">
+                <div class="navbar-collapse collapse sidebar-navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#"
+                               onclick="submitForm('/account/enterPatientDetails.action', 'NO-DATA', 'containerdiv');">New
+                            Patient entry</a>
+                        </li>
+                        <li><a href="#"
+                               onclick="submitForm('/account/patientNameReportDetails.action', 'NO-DATA', 'containerdiv');">Search
+                            by name</a>
+                        </li>
+                        <li><a href="#"
+                               onclick="submitForm('/account/patientIdReportDetails.action', 'NO-DATA', 'containerdiv');">Search
+                            by ID</a>
+                        </li>
+                        <li><a href="#"
+                               onclick="submitForm('/account/formDateReportDetails.action', 'NO-DATA', 'containerdiv');">Search
+                            with dates</a>
+                        </li>
+                        <li><a href="#"
+                               onclick="submitForm('/account/patientProfiles.action', 'NO-DATA', 'containerdiv');">Patient
+                            Profiles</a>
+                        </li>
+                    </ul>
                 </div>
-                <br/>
             </div>
         </div>
     </div>
+    <div class="col-xs-9, col-lg-9 col-md-9 col-sm-9">
+        <div id="containerdiv">
+            <div class="login-form">
+                &nbsp;&nbsp; Welcome to Swasth telangana.
+            </div>
+            <br/>
+        </div>
+    </div>
+</div>
 </div>
 <script type="text/javascript"
         src="<%=request.getContextPath()%>/resources/dist/js/app/jquery-2.1.3.js"></script>

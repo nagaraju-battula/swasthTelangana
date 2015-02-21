@@ -1,55 +1,21 @@
-<script type="text/javascript">
-    $(document).ready(function() {
-        submitForm('/account/backtohome.action', 'NO-DATA', 'containerdiv');
-    });
-</script>
-
-<div class="bs-sidebar affix">
-    <div class="list-group-item active">
+<div class="navbar-collapse collapse sidebar-navbar-collapse">
+    <ul class="nav navbar-nav">
         <li class="active">Select your option</li>
-    </div>
-    <ul class="nav bs-sidenav"><a href="#" class="list-group-item"
-                                  onclick="submitForm('/account/enterPatientDetails.action', 'NO-DATA', 'containerdiv');"><strong><br>New
-        Patient entry</strong> </a>
-        <li>
-            <div class="todo-icon fui-eye"></div>
-            <div class="todo-content">
-                <h4 class="todo-name">
-                    <a href="#"
-                       onclick="submitForm('/account/patientNameReportDetails.action', 'NO-DATA', 'containerdiv');"><strong><br>Search
-                        by name</strong></a>
-                </h4>
-            </div>
+        <li><a href="#" onclick="submitForm('/account/enterPatientDetails.action', 'NO-DATA', 'containerdiv');">New
+            Patient entry</a>
         </li>
-        <li>
-            <div class="todo-icon fui-eye"></div>
-            <div class="todo-content">
-                <h4 class="todo-name">
-                    <a href="#"
-                       onclick="submitForm('/account/patientIdReportDetails.action', 'NO-DATA', 'containerdiv');"><strong><br>Search
-                        by ID</strong></a>
-                </h4>
-            </div>
+        <li><a href="#"
+               onclick="submitForm('/account/patientNameReportDetails.action', 'NO-DATA', 'containerdiv');">Search
+            by name</a>
         </li>
-        <li>
-            <div class="todo-icon fui-eye"></div>
-            <div class="todo-content">
-                <h4 class="todo-name">
-                    <a href="#"
-                       onclick="submitForm('/account/formDateReportDetails.action', 'NO-DATA', 'containerdiv');"><strong><br>Search
-                        with dates</strong></a>
-                </h4>
-            </div>
+        <li><a href="#" onclick="submitForm('/account/patientIdReportDetails.action', 'NO-DATA', 'containerdiv');">Search
+            by ID</a>
         </li>
-        <li>
-            <div class="todo-icon fui-eye"></div>
-            <div class="todo-content">
-                <h4 class="todo-name">
-                    <a href="#"
-                       onclick="submitForm('/account/patientProfiles.action', 'NO-DATA', 'containerdiv');"><strong><br>Patient
-                        Profiles</strong></a>
-                </h4>
-            </div>
+        <li><a href="#" onclick="submitForm('/account/formDateReportDetails.action', 'NO-DATA', 'containerdiv');">Search
+            with dates</a>
+        </li>
+        <li><a href="#" onclick="submitForm('/account/patientProfiles.action', 'NO-DATA', 'containerdiv');">Patient
+            Profiles</a>
         </li>
     </ul>
 </div>

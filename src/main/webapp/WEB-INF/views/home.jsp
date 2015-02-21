@@ -17,7 +17,7 @@
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <strong> Sign in to continue</strong>
+                    <strong>Sign in to continue</strong>
                 </div>
                 <div class="panel-body">
                     <form role="form" method="POST" name="loginform" id="loginform" commandName="loginUser"
