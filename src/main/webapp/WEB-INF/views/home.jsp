@@ -6,17 +6,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Swasth telangana</title>
-    <meta name="description"
-          content="Flat UI Kit Free is a Twitter Bootstrap Framework design and Theme, this responsive framework includes a PSD and HTML version."/>
-
-    <meta name="viewport"
-          content="width=1000, initial-scale=1.0, maximum-scale=1.0">
-    <link rel="shortcut icon" href="img/favicon.ico">
+    <title>Swasth Telangana</title>
+    <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
     <link rel="shortcut icon" href="<%=request.getContextPath()%>/resources/img/login/icon.png">
 </head>
 <body>
@@ -34,8 +26,8 @@
                             <div class="row">
                                 <div class="center-block">
                                     <img class="profile-img"
-                                         src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
-                                         alt="">
+                                         src="<%=request.getContextPath()%>/resources/img/login/icon.png"
+                                         alt="swasthTelangana">
                                 </div>
                             </div>
                             <div class="row">
@@ -80,15 +72,9 @@
     </div>
 </div>
 <script type="text/javascript"
-        src="<%=request.getContextPath()%>/resources/dist/js/vendor/jquery-2.1.3.js"></script>
+        src="<%=request.getContextPath()%>/resources/dist/js/app/jquery-2.1.3.js"></script>
 <script type="text/javascript"
         src="<%=request.getContextPath()%>/resources/dist/js/app/apputils.js"></script>
-<!-- Loading Bootstrap -->
-<link
-        href="<%=request.getContextPath()%>/resources/dist/css/vendor/bootstrap.min.css"
-        rel="stylesheet">
-<link
-        href="<%=request.getContextPath()%>/resources/dist/css/vendor/style.css"
-        rel="stylesheet">
+<link href="<%=request.getContextPath()%>/resources/dist/css/bootstrap/bootstrap.css" rel="stylesheet">
 </body>
 </html>
