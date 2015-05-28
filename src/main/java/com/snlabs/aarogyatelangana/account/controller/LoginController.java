@@ -79,6 +79,7 @@ public class LoginController {
         return view;
     }
 
+    
     public AccountService getAccountService() {
         return accountService;
     }
