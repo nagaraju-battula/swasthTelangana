@@ -76,6 +76,7 @@ public class LoginController {
 		 * result?"updateaccountsubmissionsuccess":"updateaccountsubmissionfail"
 		 * ;
 		 */
+        //Git test
         
         return view;
     }
