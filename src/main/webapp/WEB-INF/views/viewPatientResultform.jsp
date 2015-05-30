@@ -25,7 +25,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-5 col-lg-5">Patient
-						Address</label> <label class="control-label col-md-9 col-lg-9">${form.patientAddress}</label>
+						Address</label> <label class="control-label col-md-9 col-lg-9">${form.patientAddress.address}</label>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-5 col-lg-5">Aadhar Number</label> <label

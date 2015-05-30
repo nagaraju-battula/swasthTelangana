@@ -3,14 +3,18 @@ package com.snlabs.aarogyatelangana.account.dao.impl;
 import com.snlabs.aarogyatelangana.account.beans.Patient;
 import com.snlabs.aarogyatelangana.account.beans.PatientAddress;
 import com.snlabs.aarogyatelangana.account.beans.User;
+import com.snlabs.aarogyatelangana.account.beans.UserDetails;
+import com.snlabs.aarogyatelangana.account.beans.UserDetailsRowMapper;
 import com.snlabs.aarogyatelangana.account.dao.PatientDao;
 import com.snlabs.aarogyatelangana.account.service.impl.PatientProfileMapper;
 import com.snlabs.aarogyatelangana.account.service.impl.PatientRowMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.sql.DataSource;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -144,10 +148,15 @@ public class PatientDaoImpl implements PatientDao {
     public Patient searchPatientByName(String patientName) {
         Patient patient = null;
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT * FROM T_PATIENT WHERE F_PATIENT_NAME='")
-                .append(patientName).append("'");
+        sb.append("SELECT * FROM T_PATIENT PAT, T_PATIENT_ADDRESS ADDR WHERE ")
+         .append("PAT.F_PATIENT_ID = ADDR.F_PATIENT_ID AND ")
+         .append("PAT.F_PATIENT_NAME = ?");
+        
+        Object[] args = new Object[] { patientName };
+                
         try {
-            List<User> detailsList = (List<User>) jdbcTemplate.queryForObject(sb.toString(),
+            @SuppressWarnings("unchecked")
+			List<User> detailsList = (List<User>) jdbcTemplate.queryForObject(sb.toString(), args, 
                     new PatientRowMapper());
             for (User user : detailsList) {
                 if (user instanceof Patient) {
