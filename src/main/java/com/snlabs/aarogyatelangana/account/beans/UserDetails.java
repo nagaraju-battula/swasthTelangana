@@ -9,12 +9,30 @@ public class UserDetails {
 	private String userRole;
 	private String lastlogin;
 	private String mobileNumber;
+	private String district;
+	private String state;
 
-	public static String getLoginId() {
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getLoginId() {
 		return loginId;
 	}
 
-	public static void setLoginId(String loginId) {
+	public void setLoginId(String loginId) {
 		UserDetails.loginId = loginId;
 	}
 
@@ -54,7 +72,7 @@ public class UserDetails {
 	public String toString() {
 		return "UserDetails [displayName=" + displayName + ", userRole="
 				+ userRole + ", lastlogin=" + lastlogin + ", mobileNumber="
-				+ mobileNumber + "]";
+				+ mobileNumber + ", district=" + district + ", state=" + state
+				+ "]";
 	}
-
 }

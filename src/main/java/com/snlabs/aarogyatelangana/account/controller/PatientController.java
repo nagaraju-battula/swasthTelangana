@@ -38,7 +38,8 @@ public class PatientController {
         if (patientID != null) {
             model.put("patient", formService.getPatientDetails(Integer.parseInt(patientID)));
         }
-        model.put("loginID", UserDetails.getLoginId());
+        UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
+        model.put("loginID", userDetails.getLoginId());
         return "patientForm";
     }
 
@@ -55,14 +56,15 @@ public class PatientController {
     @RequestMapping(value = {"patientProfiles.action"}, method = RequestMethod.POST)
     public ModelAndView patientProfiles(HttpSession session, ModelMap model) {
         ModelAndView modelAndView = null;
-        if (UserDetails.getLoginId() != null) {
+        UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
+        if (userDetails.getLoginId() != null) {
             modelAndView = new ModelAndView();
             List<Patient> patientProfiles = patientService
-                    .getPatientProfiles(UserDetails.getLoginId());
+                    .getPatientProfiles(userDetails);
             try {
                 if (patientProfiles != null) {
                     modelAndView.addObject("patientProfiles", patientProfiles);
-                    modelAndView.addObject("result", patientProfiles.size() + " No of Profiles Found. Created by " + UserDetails.getLoginId());
+                    modelAndView.addObject("result", patientProfiles.size() + " No of Profiles Found. Created by " + userDetails.getLoginId());
                 } else {
                     modelAndView.addObject("result", "No Profiles found.");
                 }
@@ -114,7 +116,8 @@ public class PatientController {
     public String searchReportByPatientId(@RequestBody Patient patient,
                                           HttpSession session, ModelMap map) {
         Integer patientId = patient.getPatientID();
-        Patient resultForm = patientService.searchPatientById(patientId);
+        UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
+        Patient resultForm = patientService.searchPatientById(patientId, userDetails);
         session.setAttribute("form", resultForm);
         session.setAttribute("patientId", patient.getPatientID());
         session.setAttribute("patientName", null);
@@ -130,27 +133,34 @@ public class PatientController {
                                             HttpSession session, ModelMap map) {
         session.setAttribute("patientId", null);
         session.setAttribute("patientName", patient.getPatientName());
+        
+        UserDetails userDetails = (UserDetails)session.getAttribute("userDetails");
+        
         Patient resultForm = patientService.searchPatientByName(patient
-                .getPatientName());
+                .getPatientName(), userDetails);
         session.setAttribute("form", resultForm);
         System.out.println(resultForm);
-        if (resultForm != null) {
+        
+        return "viewPatientResultform";
+        
+        /*if (resultForm != null) {
             return "viewPatientResultform";
         } else {
             return "errorResultForm";
-        }
+        }*/
     }
 
     @RequestMapping(value = {"listPatientProfilesByDate.action"}, method = RequestMethod.POST)
     public String listPatientProfilesByDate(HttpServletRequest request, HttpSession session, ModelMap model) {
-        if (UserDetails.getLoginId() != null) {
+    	UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
+    	if (userDetails.getLoginId() != null) {
             List<Patient> patientProfiles = patientService
-                    .getPatientProfiles(UserDetails.getLoginId());
+                    .getPatientProfiles(userDetails);
             try {
                 if (patientProfiles != null) {
                     model.put("patientProfiles", patientProfiles);
                 }
-                model.put("result", patientProfiles.size() + " No of Profiles Found. Created by " + UserDetails.getLoginId());
+                model.put("result", patientProfiles.size() + " No of Profiles Found. Created by " + userDetails.getLoginId());
             } catch (Exception e) {
                 e.printStackTrace();
             }

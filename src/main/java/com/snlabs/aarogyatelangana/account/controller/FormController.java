@@ -4,6 +4,7 @@ import com.snlabs.aarogyatelangana.account.beans.*;
 import com.snlabs.aarogyatelangana.account.service.DownloadService;
 import com.snlabs.aarogyatelangana.account.service.FormService;
 import com.snlabs.aarogyatelangana.account.service.PatientService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -241,11 +243,12 @@ public class FormController {
     @RequestMapping(value = {"saveDeclarationDetails.action"}, method = RequestMethod.POST)
     public String saveDeclaration(@RequestBody Declaration declaration,
                                   HttpSession session, ModelMap model, HttpServletRequest request) {
+    	UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
         if (declaration.getPatientID() > 0) {
             if (formService.saveDeclarationDetails(declaration) != null) {
                 File patientExcelFile = downloadService.downloadForm(declaration.getPatientID(), request, session);
                 if (patientExcelFile != null) {
-                    Patient patient = patientService.searchPatientById(declaration.getPatientID());
+                    Patient patient = patientService.searchPatientById(declaration.getPatientID(), userDetails);
                     if (patient != null) {
                         patient.setFormFDownloadPath(patientExcelFile.getAbsolutePath());
                         patientService.createPatientRecord(patient);
