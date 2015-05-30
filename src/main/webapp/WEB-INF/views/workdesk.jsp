@@ -30,21 +30,21 @@
                     <ul class="nav navbar-nav navbar-left">
                         <li><a href="#"
                                onclick="submitForm('/account/newpatiententrytab.action', 'NO-DATA', 'lhndiv');">Patient
-                            Entry<span class="navbar-unread">1</span>
+                            Entry<span class="navbar-unread"></span>
                         </a></li>
                         <li><a href="#"
                                onclick="submitForm('/account/formftab.action', 'NO-DATA', 'lhndiv');">Form
-                            F<span class="navbar-unread">1</span>
+                            F<span class="navbar-unread"></span>
                         </a></li>
                         <li><a href="#"
                                onclick="submitForm('/account/userAccounttab.action', 'NO-DATA', 'lhndiv');">Account<span
-                                class="navbar-unread">1</span>
+                                class="navbar-unread"></span>
                         </a></li>
 
                         <c:if test="${userDetails.userRole == 'Administrator'}">
                             <li><a href="#"
                                    onclick="submitForm('/account/accountmanagementtab.action', 'NO-DATA', 'lhndiv');">Management<span
-                                    class="navbar-unread">1</span>
+                                    class="navbar-unread"></span>
                             </a></li>
                         </c:if>
 

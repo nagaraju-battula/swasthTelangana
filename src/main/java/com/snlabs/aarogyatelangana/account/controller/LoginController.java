@@ -106,4 +106,10 @@ public class LoginController {
 		this.accountService = accountService;
 	}
 	
+	public static void main(String[] args) {
+		AccountUtils accUtils = new AccountUtils();
+		String hashedPassword = accUtils.md5("Nag");
+		System.out.println(hashedPassword);
+	}
+	
 }
