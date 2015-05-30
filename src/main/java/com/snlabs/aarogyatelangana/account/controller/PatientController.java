@@ -45,6 +45,8 @@ public class PatientController {
     @RequestMapping(value = {"savePatientDetails.action"}, method = RequestMethod.POST)
     public String savePatientDetails(@RequestBody Patient patient,
                                      HttpSession session, ModelMap model) {
+    	String createdBy = ((UserDetails)session.getAttribute("userDetails")).getLoginId();
+    	patient.setCreatedBy(createdBy);
         model.put("patient", patientService.createPatientRecord(patient));
         model.put("result", patient.getPatientName() + " details has been saved successfully...!");
         return "patientForm";

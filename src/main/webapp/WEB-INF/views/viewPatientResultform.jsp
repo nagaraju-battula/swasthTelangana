@@ -1,4 +1,5 @@
-<div class="panel panel-primary">
+
+<div class="panel panel-default">
 	<div class="panel-heading">Patient Details</div>
 	<div class="panel-body">
 		<fieldset>
@@ -19,20 +20,20 @@
 					</label> <label class="control-label col-md-9 col-lg-9">${form.patientName}</label>
 				</div>
 				<div class="form-group">
+					<label class="control-label col-md-5 col-lg-5">Age</label> <label
+						class="control-label col-md-9 col-lg-9">${form.age}</label>
+				</div>
+				<div class="form-group">
 					<label class="control-label col-md-5 col-lg-5">Patient
 						Address</label> <label class="control-label col-md-9 col-lg-9">${form.patientAddress}</label>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-5 col-lg-5">Price</label> <label
-						class="control-label col-md-9 col-lg-9">${form.price}</label>
+					<label class="control-label col-md-5 col-lg-5">Aadhar Number</label> <label
+						class="control-label col-md-9 col-lg-9">${form.aadharNo}</label>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-5 col-lg-5">Discount</label> <label
-						class="control-label col-md-9 col-lg-9">${form.discount}</label>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-5 col-lg-5">Net Amount</label> <label
-						class="control-label col-md-9 col-lg-9">${form.netAmount}</label>
+					<label class="control-label col-md-5 col-lg-5">createdBy</label> <label
+						class="control-label col-md-9 col-lg-9">${form.createdBy}</label>
 				</div>
 			</form>
 		</fieldset>

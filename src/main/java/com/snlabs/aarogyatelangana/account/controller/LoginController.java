@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.snlabs.aarogyatelangana.account.beans.LoginUser;
 import com.snlabs.aarogyatelangana.account.beans.NewUser;
@@ -52,13 +53,13 @@ public class LoginController {
 		return "home";
 	}
 	
-	@RequestMapping(value = {"logout.action"} ,method = RequestMethod.POST)
+	/*@RequestMapping(value = {"logout.action"} ,method = RequestMethod.POST)
 	public String logout(HttpSession session, ModelMap modelMap) {
 		session.invalidate();
 		return "home";
 		
 	}
-	
+	*/
 	
 	@RequestMapping(value = {"createaccountsubmission.action"} ,method = RequestMethod.POST)
 	public String createaccountsubmission(@RequestBody NewUser user, ModelMap model, HttpSession session) {
