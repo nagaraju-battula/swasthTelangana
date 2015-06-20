@@ -1,9 +1,7 @@
 
 
 function processRequest(url, data, targetId) {
-   //var promodomain ='http://swasthtelangana.com:8080';
-    var promodomain =  'http://localhost:8080';
-	//var promodomain = getDomainName('promoadmin');
+    var promodomain =  'http://' + window.location.host;
 	jQuery.ajax({
 		type : "POST",
 		url : promodomain + url,
