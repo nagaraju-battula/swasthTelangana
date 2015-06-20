@@ -22,7 +22,7 @@
 
                     <div class="col-md-7 col-lg-7">
                         <br><a class="btn btn-primary" href="#"
-                               onclick="submitForm('/account/listPatientProfilesByDate.action', 'searchFormByDate', 'searchResultdiv')">HII</a>
+                               onclick="submitForm('/account/listPatientProfilesByDate.action', 'searchFormByDate', 'searchResultdiv')">Search</a>
 
                         <%--<a class="btn btn-primary"
                             href="<%=request.getContextPath()%>/downLoadForm.action">Search
@@ -44,4 +44,6 @@
             </form>
         </fieldset>
     </div>
+</div>
+<div id="searchResultdiv">
 </div>

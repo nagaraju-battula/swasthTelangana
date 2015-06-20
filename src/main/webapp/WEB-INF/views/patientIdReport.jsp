@@ -8,8 +8,8 @@
 					<label class="control-label col-md-5 col-lg-5">Enter
 						Patient Id</label>
 					<div class="col-md-4 col-lg-4">
-						<input class="form-control " type="text" name="patientId"
-							id="patientId" />
+						<input class="form-control " type="text" name="patientID"
+							id="patientID" />
 					</div>
 					<div class="col-md-3 col-lg-3">
 						<a class="btn btn-primary form-control" href="#"
@@ -20,4 +20,6 @@
 			</form>
 		</fieldset>
 	</div>
+</div>
+<div id="searchResultdiv">
 </div>

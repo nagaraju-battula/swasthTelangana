@@ -1,5 +1,6 @@
 package com.snlabs.aarogyatelangana.account.service;
 
+import com.snlabs.aarogyatelangana.account.beans.Form;
 import com.snlabs.aarogyatelangana.account.beans.Patient;
 import com.snlabs.aarogyatelangana.account.beans.UserDetails;
 
@@ -14,7 +15,7 @@ public interface PatientService {
 
     public Patient searchPatientByName(String patientName, UserDetails userDetails);
 
-    public List<Patient> getPatientProfiles(UserDetails userDetails);
+    public List<Patient> getPatientProfiles(UserDetails userDetails, Form form);
 
     public List<Patient> getPatientProfilesByDate(Date fromDate, Date tillDate, UserDetails userDetails);
 }

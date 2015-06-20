@@ -1,5 +1,6 @@
 package com.snlabs.aarogyatelangana.account.service.impl;
 
+import com.snlabs.aarogyatelangana.account.beans.Form;
 import com.snlabs.aarogyatelangana.account.beans.Patient;
 import com.snlabs.aarogyatelangana.account.beans.UserDetails;
 import com.snlabs.aarogyatelangana.account.dao.PatientDao;
@@ -59,8 +60,8 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<Patient> getPatientProfiles(UserDetails userDetails) {
-        return patientDao.searchPatientProfilesByCreator(userDetails);
+    public List<Patient> getPatientProfiles(UserDetails userDetails, Form form) {
+        return patientDao.searchPatientProfilesByCreator(userDetails, form);
     }
 
     @Override

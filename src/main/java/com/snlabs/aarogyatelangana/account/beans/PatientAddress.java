@@ -3,6 +3,10 @@ package com.snlabs.aarogyatelangana.account.beans;
 import java.io.Serializable;
 
 public class PatientAddress implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2871735204664282990L;
 	private String district;
 	private String state;
 	private int pincode;
