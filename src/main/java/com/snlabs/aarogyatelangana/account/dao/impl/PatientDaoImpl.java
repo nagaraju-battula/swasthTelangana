@@ -221,28 +221,28 @@ public class PatientDaoImpl implements PatientDao {
 		List<Patient> patientList = new ArrayList<Patient>();
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT * FROM T_PATIENT PAT, T_PATIENT_ADDRESS ADDR WHERE ")
-				.append("PAT.F_PATIENT_ID = ADDR.F_PATIENT_ID AND ");
+				.append("PAT.F_PATIENT_ID = ADDR.F_PATIENT_ID ");
 
 		Object[] args = null;
 
 		if (form != null) {
 			if ("HealthCenterUser".equals(userDetails.getUserRole())) {
-				sb.append("PAT.F_CREATED_TIMESTAMP BETWEEN ? AND ?").append(
+				sb.append("AND PAT.F_CREATED_TIMESTAMP BETWEEN ? AND ?").append(
 						" AND PAT.F_CREATED_BY = ?");
 				args = new Object[] { form.getFromDate(), form.getToDate(),
 						userDetails.getLoginId() };
 			} else if ("DistrictUser".equals(userDetails.getUserRole())) {
-				sb.append("PAT.F_CREATED_TIMESTAMP BETWEEN ? AND ?").append(
+				sb.append("AND PAT.F_CREATED_TIMESTAMP BETWEEN ? AND ?").append(
 						" AND ADDR.F_DISTRICT = ?");
 				args = new Object[] { form.getFromDate(), form.getToDate(),
 						userDetails.getDistrict() };
 			} else if ("StateUser".equals(userDetails.getUserRole())) {
-				sb.append("PAT.F_CREATED_TIMESTAMP BETWEEN ? AND ?").append(
+				sb.append("AND PAT.F_CREATED_TIMESTAMP BETWEEN ? AND ?").append(
 						" AND ADDR.F_STATE = ?");
 				args = new Object[] { form.getFromDate(), form.getToDate(),
 						userDetails.getState() };
 			} else if ("Administrator".equals(userDetails.getUserRole())) {
-				sb.append("PAT.F_CREATED_TIMESTAMP BETWEEN ? AND ?");
+				sb.append("AND PAT.F_CREATED_TIMESTAMP BETWEEN ? AND ?");
 				args = new Object[] { form.getFromDate(), form.getToDate() };
 			}
 		} else {

@@ -174,11 +174,17 @@ public class PatientController {
 			try {
 				if (patientProfiles != null) {
 					model.put("patientProfiles", patientProfiles);
+					model.put("result",
+							patientProfiles.size()
+									+ " No of Profiles Found. Created by "
+									+ userDetails.getLoginId());
+				}else {
+					model.put("result",
+							0
+									+ " No of Profiles Found. Created by "
+									+ userDetails.getLoginId());
 				}
-				model.put("result",
-						patientProfiles.size()
-								+ " No of Profiles Found. Created by "
-								+ userDetails.getLoginId());
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
